@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <title>FOEDI</title>
+
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+
+        <link rel="stylesheet" href="css/bootstrap.css"> 
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/foediapp_styles.css">
+        <link rel="stylesheet" type="text/css" href="css/form-validations.css">
+    </head>
+    <body  class="fondo-login">
+        <div class="container text-center pt-4">
+            <img alt="Imagen FOEDI" class="img-fluid" src="images/marca.png" />
+            <!-- FORMULARIO INGRESO -->
+            <form id="FormLogin" class="needs-validation" method="post"> 
+                <div class="form-group">
+                    <label for="InputUsuario">Usuario/Correo</label>
+                    <input type="text" class="form-control" id="InputUsuario">
+                 </div>
+                <div class="form-group">
+                    <label for="InputPassword">Contraseña</label>
+                    <input type="password" class="form-control" id="InputPassword">
+
+                </div>
+                <br>    
+                <button type="submit" class="btn btn-primary mb-4">INICIAR SESIÓN</button>
+                <br>
+                <a href="#" class="btn btn-info mr-2">RECUPERAR CONTRASEÑA</a>
+                <br> <br>
+                <a id ="ip" href="#" class="btn btn-link"><i class="fas fa-network-wired"></i>IP</a>
+
+            </form>
+            <!-- /FORMULARIO INGRESO -->
+        </div>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/popper.js"></script>
+        <script type="text/javascript" src="js/fontawesome.js"></script>
+        <script type="text/javascript" src="js/auth.js"></script>
+    </body>
+</html>
