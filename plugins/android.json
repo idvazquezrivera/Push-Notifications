@@ -12,6 +12,9 @@
     },
     "cordova-plugin-dialogs": {
       "PACKAGE_NAME": "org.apache.cordova.myApp"
+    },
+    "cordova-plugin-inappbrowser": {
+      "PACKAGE_NAME": "org.apache.cordova.myApp"
     }
   },
   "dependent_plugins": {}
