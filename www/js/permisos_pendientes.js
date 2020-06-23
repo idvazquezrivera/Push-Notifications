@@ -3,7 +3,6 @@ var DOMAIN  = (typeof ip === 'undefined' && ip ? ip :  'http://192.168.206.128:8
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
 
 document.addEventListener("deviceready", function() {
-    window.open = cordova.InAppBrowser.open;
     api.init();
 
     $("#seleccionarTodos").click( function(){
