@@ -10,7 +10,6 @@ var errores = {
 };
 
 document.addEventListener("deviceready", function() {
-    window.open = cordova.InAppBrowser.open;
     window.localStorage.removeItem('session');
 
     api.init(errores);
