@@ -59,8 +59,8 @@
     
       <!-- below requires the splash screen plugin -->
       <!-- docs: https://github.com/apache/cordova-plugin-splashscreen -->
-      <preference name="android-minSdkVersion" value="25"/>
-      <preference name="android-targetSdkVersion" value="28"/>
+      <preference name="android-minSdkVersion" value="19"/>
+      <preference name="android-targetSdkVersion" value="26"/>
       <preference name="android-installLocation" value="auto"/>
       <preference name="Orientation" value="portrait"/>
       <preference name="android-signed" value="true"/>
