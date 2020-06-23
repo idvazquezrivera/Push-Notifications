@@ -45,9 +45,10 @@ var api = {
                     InputPassword.val("");
                     InputUsuario.val("");
                 },       
-                titulo_error,          
+                'Llene sus datos',          
                 'Aceptar'                
                 );
+                return;
         }
         $.ajax({
             url: DOMAIN + '/oauth/token',
@@ -61,11 +62,12 @@ var api = {
             },
             error:function(err){
                 err = err.responseJSON;
-                console.log(errores);
-                console.log(err);
-                var message_error = err.error_description && errores[err.error_description] ? errores[err.error_description] : errores.descripcion_default;
-                var titulo_error = err.error && errores[err.error] ? errores[err.error] : errores.titulo_default
 
+                var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
+                var titulo_error = err && err.hasOwnProperty('error') && typeof  errores[err.error]  != "undefined"? errores[err.error] : errores.titulo_default
+
+                message_error = message_error ? message_error : "Error desconocido";
+                titulo_error = titulo_error ? titulo_error : "Algo saluio mal";
                 navigator.notification.alert(
                     message_error,  
                     function(){
