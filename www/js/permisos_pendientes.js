@@ -32,6 +32,15 @@ var api = {
             error:function(response){
 
                 var err = response.responseJSON;
+                if(!err || typeof err === "undefined")
+                {
+                    navigator.notification.alert(
+                        "Error desconocido",  
+                        null,       
+                        'Error en la conexion',          
+                        'Aceptar'                
+                    );
+                }
                 var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
                 var titulo_error = err && err.hasOwnProperty('error') && typeof  errores[err.error]  != "undefined"? errores[err.error] : errores.titulo_default
                 message_error = message_error ? message_error : "Error desconocido";
@@ -123,6 +132,12 @@ var api = {
                     method: "PUT",    
                     success: function(data){
                         $("#idPermiso"+$(button).attr('data-idPermiso')).fadeOut();
+                        navigator.notification.alert(
+                            "El permiso fue autorizado con éxito.",  
+                            null,       
+                            "Autorizado",          
+                            'Aceptar'                
+                        );
                         $("#loading").fadeOut();
                     }
                 })
@@ -142,21 +157,22 @@ var api = {
                 }
                 var ids = [];
                 $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-                    if($(e).is(':checked'));
+                    if($(e).is(':checked')){
                         ids.push($(e).attr('data-idpermiso'));
+                    }
                 });
                  $.ajax({
                     url: DOMAIN + 'autorizaciones/varios',
                     data:{ids: ids },
                     method: "PUT",    
                     success: function(data){
-                        $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-                            if($(e).is(':checked'));
-                                $("#idPermiso"+$(e).attr('data-idpermiso')).fadeOut();
-                        });
+                        for(x in ids){
+                            $("#idPermiso"+ids[x]).fadeOut();
+                        };
+                
                     }
                 })
-             },
+            },
              $(button).parent().find('.tipoPermiso').html(),           // title
             ['Aprovar','Cancelar']     // buttonLabels
         );
