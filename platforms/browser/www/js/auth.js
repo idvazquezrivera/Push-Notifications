@@ -1,5 +1,5 @@
 var ip = window.localStorage.getItem('ip');
-var DOMAIN  = (typeof ip === 'undefined' && ip ? ip :  'http://192.168.206.128:8085' ) + '/foediapi';
+var DOMAIN  = (ip ? ip :  'http://192.168.206.128:8085') + '/foediapi';
 var errores = {
     "invalid_grant": "Concesión inválida",
     "Bad credentials": "Credenciales Invalidas",
@@ -10,21 +10,22 @@ var errores = {
 };
 
 document.addEventListener("deviceready", function() {
-    window.open = cordova.InAppBrowser.open;
     window.localStorage.removeItem('session');
 
     api.init(errores);
-
     $("#ip").click(function(){
         navigator.notification.prompt(
-            'Ip y Puerto',  // message
+            'Dominio del API',  // message
             function(results){
-                window.localStorage.setItem('ip', results[3]);
+                if(results.buttonIndex == 1)
+                 window.localStorage.setItem('ip', results.input1);
 
+                ip = window.localStorage.getItem('ip');
+                DOMAIN  = (ip ? ip :  'http://192.168.206.128:8085') + '/foediapi';
             },                  // callback to invoke
             'Personaliza',            // title
             ['Ok','Exit'],             // buttonLabels
-           '127.0.0.0:5555'                 // defaultText
+           'http://127.0.0.0:5555'                 // defaultText
         );
     })
 }, false);
@@ -34,6 +35,8 @@ var api = {
     init: function(errores){
         var self = this;
         $('#FormLogin').submit(self.get_token);
+        $("#loading").fadeOut();
+
     },
     get_token: function(event){
         event.preventDefault();
@@ -46,9 +49,10 @@ var api = {
                     InputPassword.val("");
                     InputUsuario.val("");
                 },       
-                titulo_error,          
+                'Llene sus datos',          
                 'Aceptar'                
                 );
+                return;
         }
         $.ajax({
             url: DOMAIN + '/oauth/token',
@@ -62,11 +66,12 @@ var api = {
             },
             error:function(err){
                 err = err.responseJSON;
-                console.log(errores);
-                console.log(err);
-                var message_error = err.error_description && errores[err.error_description] ? errores[err.error_description] : errores.descripcion_default;
-                var titulo_error = err.error && errores[err.error] ? errores[err.error] : errores.titulo_default
 
+                var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
+                var titulo_error = err && err.hasOwnProperty('error') && typeof  errores[err.error]  != "undefined"? errores[err.error] : errores.titulo_default
+
+                message_error = message_error ? message_error : "Error desconocido";
+                titulo_error = titulo_error ? titulo_error : "Algo saluio mal";
                 navigator.notification.alert(
                     message_error,  
                     function(){
@@ -89,7 +94,6 @@ var api = {
                 xhr.setRequestHeader("Authorization", "Basic " + btoa("foediapp:F0ed1@pp!20"));
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             },
-            
         }); 
     }
 }

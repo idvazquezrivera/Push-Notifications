@@ -22,6 +22,8 @@ var api = {
             dataType : 'json',
             crossDomain: true,
             error:function(response){
+                $("#loading").fadeOut();
+
                 var err = response.responseJSON;
                 var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
                 var titulo_error = err && err.hasOwnProperty('error') && typeof  errores[err.error]  != "undefined"? errores[err.error] : errores.titulo_default
@@ -42,7 +44,7 @@ var api = {
             beforeSend: function(xhr) { 
                 xhr.setRequestHeader("Authorization", "Bearer " + SESSION.access_token);
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-
+                $("#loading").fadeIn();
             },
             
         }); 
@@ -50,6 +52,8 @@ var api = {
     },
     permisos_pendientes: function(event){
         var self = this
+        
+
         $.ajax({
             url: DOMAIN + 'pendientes',
             method: "GET",    
@@ -83,6 +87,8 @@ var api = {
                     }
 
                 }
+                $("#loading").fadeOut();
+
             },
         }); 
     },
@@ -145,7 +151,8 @@ var api = {
              $(button).parent().find('.tipoPermiso').html(),           // title
             ['Aprovar','Cancelar']     // buttonLabels
         );
-        
+        $("#loading").fadeOut();
+
     },
     rechazar_varios: function(button){
         navigator.notification.prompt(

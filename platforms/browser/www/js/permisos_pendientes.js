@@ -1,9 +1,8 @@
 var ip = window.localStorage.getItem('ip');
-var DOMAIN  = (typeof ip === 'undefined' && ip ? ip :  'http://192.168.206.128:8085' ) + '/foediapi/api/permisos/';
+var DOMAIN  = (ip ? ip :  'http://192.168.206.128:8085') + '/foediapi';
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
 
 document.addEventListener("deviceready", function() {
-    window.open = cordova.InAppBrowser.open;
     api.init();
 
     $("#seleccionarTodos").click( function(){
@@ -24,15 +23,19 @@ var api = {
             crossDomain: true,
             error:function(response){
                 var err = response.responseJSON;
-                console.log(response);
-                if(err.error == 'invalid_token')
+                var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
+                var titulo_error = err && err.hasOwnProperty('error') && typeof  errores[err.error]  != "undefined"? errores[err.error] : errores.titulo_default
+                message_error = message_error ? message_error : "Error desconocido";
+                titulo_error = titulo_error ? titulo_error : "Algo saluio mal";
+                
+                if( err.hasOwnProperty('error')  && err.error == 'invalid_token')
                     window.location = 'index.html';
 
                 if(err.error && err.message)
                     navigator.notification.alert(
-                        err.error,  
+                        message_error,  
                         null,       
-                        err.message,          
+                        titulo_error,          
                         'Aceptar'                
                     );
             }, 
@@ -120,7 +123,7 @@ var api = {
             'Aprobar', // message
              function(results){
                 if(results == 2/*<-cancelar*/){
-                    retQurn;
+                    return;
                 }
                 var ids = [];
                 $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
@@ -133,7 +136,7 @@ var api = {
                     method: "PUT",    
                     success: function(data){
                         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-                            $(e).attr('checked', $(self).is(':checked'));
+                            if($(e).is(':checked'));
                                 $("#idPermiso"+$(e).attr('data-idpermiso')).fadeOut();
                         });
                     }

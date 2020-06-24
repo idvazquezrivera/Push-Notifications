@@ -1,11 +1,12 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "myApp",
-  "short_name": "myApp",
-  "version": "org.apache.cordova.myApp",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "author": "Apache Cordova Team",
+  "name": "Foedi",
+  "short_name": "Foedi",
+  "version": "app.permisos.foedi",
+  "description": "App Permisos Foedi",
+  "author": "Ivan Vazquez",
   "icons": [],
+  "orientation": "landscape",
   "start_url": "index.html"
 }
