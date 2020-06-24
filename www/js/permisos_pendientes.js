@@ -1,6 +1,14 @@
 var ip = window.localStorage.getItem('ip');
 var DOMAIN  = (ip ? ip :  'http://192.168.206.128:8085') + '/foediapi/api/permisos/';
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
+var errores = {
+    "invalid_grant": "Concesión inválida",
+    "Bad credentials": "Credenciales Invalidas",
+    "Unauthorized": "No Autorizado",
+    "mensaje_default": "Error desconocido",
+    "titulo_default": "Algo salio mal"
+
+};
 
 document.addEventListener("deviceready", function() {
     api.init();
