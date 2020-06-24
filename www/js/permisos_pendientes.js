@@ -115,7 +115,7 @@ var api = {
                     method: "PUT",    
                     success: function(data){
                         $("#idPermiso"+$(button).attr('data-idPermiso')).fadeOut();
-
+                        $("#loading").fadeOut();
                     }
                 })
              },
