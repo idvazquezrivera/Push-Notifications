@@ -132,7 +132,7 @@ var api = {
                     method: "PUT",    
                     success: function(data){
                         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-                            $(e).attr('checked', $(self).is(':checked'));
+                            if($(e).is(':checked'));
                                 $("#idPermiso"+$(e).attr('data-idpermiso')).fadeOut();
                         });
                     }
