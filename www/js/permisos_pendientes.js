@@ -22,7 +22,6 @@ var api = {
             dataType : 'json',
             crossDomain: true,
             error:function(response){
-                $("#loading").fadeOut();
 
                 var err = response.responseJSON;
                 var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
@@ -40,6 +39,8 @@ var api = {
                         titulo_error,          
                         'Aceptar'                
                     );
+                    $("#loading").fadeOut();
+
             }, 
             beforeSend: function(xhr) { 
                 xhr.setRequestHeader("Authorization", "Bearer " + SESSION.access_token);
