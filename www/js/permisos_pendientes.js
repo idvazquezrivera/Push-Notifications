@@ -1,6 +1,5 @@
 var ip = window.localStorage.getItem('ip');
-var DOMAIN  = typeof ip !== 'undefined' && ip ? ip :  'http://192.168.206.128:8085'
-DOMAIN =  DOMAIN + '/foediapi/api/permisos/';
+var DOMAIN  = (ip ? ip :  'http://192.168.206.128:8085') + '/foediapi';
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
 
 document.addEventListener("deviceready", function() {

@@ -1,5 +1,5 @@
 var ip = window.localStorage.getItem('ip');
-var DOMAIN  = (typeof ip === 'undefined' && ip ? ip :  'http://192.168.206.128:8085' ) + '/foediapi';
+var DOMAIN  = (ip ? ip :  'http://192.168.206.128:8085') + '/foediapi';
 var errores = {
     "invalid_grant": "Concesión inválida",
     "Bad credentials": "Credenciales Invalidas",
@@ -16,14 +16,17 @@ document.addEventListener("deviceready", function() {
 
     $("#ip").click(function(){
         navigator.notification.prompt(
-            'Ip y Puerto',  // message
+            'Dominio del API',  // message
             function(results){
-                window.localStorage.setItem('ip', results[3]);
+                if(results.buttonIndex == 1)
+                 window.localStorage.setItem('ip', results.input1);
 
+                ip = window.localStorage.getItem('ip');
+                DOMAIN  = (ip ? ip :  'http://192.168.206.128:8085') + '/foediapi';
             },                  // callback to invoke
             'Personaliza',            // title
             ['Ok','Exit'],             // buttonLabels
-           '127.0.0.0:5555'                 // defaultText
+           'http://127.0.0.0:5555'                 // defaultText
         );
     })
 }, false);
@@ -90,7 +93,6 @@ var api = {
                 xhr.setRequestHeader("Authorization", "Basic " + btoa("foediapp:F0ed1@pp!20"));
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             },
-            
         }); 
     }
 }
