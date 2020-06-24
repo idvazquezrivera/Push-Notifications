@@ -29,7 +29,7 @@ var api = {
                 message_error = message_error ? message_error : "Error desconocido";
                 titulo_error = titulo_error ? titulo_error : "Algo saluio mal";
                 
-                if(err.error == 'invalid_token')
+                if( err.hasOwnProperty('error')  && err.error == 'invalid_token')
                     window.location = 'index.html';
 
                 if(err.error && err.message)
@@ -124,7 +124,7 @@ var api = {
             'Aprobar', // message
              function(results){
                 if(results == 2/*<-cancelar*/){
-                    retQurn;
+                    return;
                 }
                 var ids = [];
                 $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
