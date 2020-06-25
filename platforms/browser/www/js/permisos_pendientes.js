@@ -5,7 +5,7 @@ var errores = {
     "invalid_grant": "Concesión inválida",
     "Bad credentials": "Credenciales Invalidas",
     "Unauthorized": "No Autorizado",
-    "mensaje_default": "Error desconocido",
+    "mensaje_default": "Ocurrio un error de conexión",
     "titulo_default": "Algo salio mal"
 
 };
@@ -19,7 +19,8 @@ document.addEventListener("deviceready", function() {
             $(e).attr('checked', $(self).is(':checked'));
         });
     });
-    
+    console.log($("input[type='checkbox']").is(':checked'));
+
     $("#AprovarVarios").click(api.aprovar_varios);
 
 }, false);
@@ -36,16 +37,16 @@ var api = {
                 if(!err || typeof err === "undefined")
                 {
                     navigator.notification.alert(
-                        "Error desconocido",  
+                        "Ocurrio un error de conexión",  
                         null,       
-                        'Error en la conexion',          
+                        'Error en la conexión',          
                         'Aceptar'                
                     );
                 }
-                var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
+                var message_error = err && err.hasOwnProperty('message') && typeof errores[err.message] != "undefined"? errores[err.message] : errores.descripcion_default;
                 var titulo_error = err && err.hasOwnProperty('error') && typeof  errores[err.error]  != "undefined"? errores[err.error] : errores.titulo_default
-                message_error = message_error ? message_error : "Error desconocido";
-                titulo_error = titulo_error ? titulo_error : "Algo saluio mal";
+                message_error = err.message ? err.message : "Ocurrio un error de conexión";
+                titulo_error = error ? error : "Algo saluio mal";
                 
                 if( err.hasOwnProperty('error')  && err.error == 'invalid_token')
                     window.location = 'index.html';
@@ -88,7 +89,7 @@ var api = {
                         clones[x] = permiso.clone(); 
                         lista.prepend(clones[x]);
                         clones[x].css('display', 'block')
-                        clones[x].attr('id', 'Permiso' + x).attr("data-idPermiso" );
+                        clones[x].attr('id', 'Permiso' + x).attr("data-idPermiso", x );
                         clones[x].find('.idPermiso').html('No. '+_p.idPermiso)
                         clones[x].find('.solicitante').html(_p.solicitante)
                         clones[x].find('.tipoPermiso').html(_p.tipoPermiso)
@@ -111,6 +112,7 @@ var api = {
         }); 
     },
     ver: function(button){
+        return alert("En construcción");
         $.ajax({
             url: DOMAIN + $(button).data('idPermiso'),
             method: "GET",    
@@ -121,7 +123,7 @@ var api = {
     },
     aprovar: function(button){
         navigator.notification.confirm(
-            'Aprobar', // message
+            'A', // message
              function(results){
                 if(results == 2/*<-cancelar*/){
                     return;
@@ -150,7 +152,7 @@ var api = {
     aprovar_varios: function(button){
  
         navigator.notification.confirm(
-            'Aprobar', // message
+            '¿Deseas aprobar varios permisos?', // message
              function(results){
                 if(results == 2/*<-cancelar*/){
                     return;
@@ -168,18 +170,21 @@ var api = {
                     success: function(data){
                         for(x in ids){
                             $("#idPermiso"+ids[x]).fadeOut();
+                            console.log("#idPermiso"+ids[x]);
                         };
                 
                     }
                 })
             },
              $(button).parent().find('.tipoPermiso').html(),           // title
-            ['Aprovar','Cancelar']     // buttonLabels
+            ['Si','No']     // buttonLabels
         );
         $("#loading").fadeOut();
 
     },
     rechazar_varios: function(button){
+        return alert("rechazar_varios En construcción");
+
         navigator.notification.prompt(
             'Motivo ', // message
              function(results){
@@ -195,6 +200,16 @@ var api = {
             ['Rechazar','Cancelar'],    // buttonLabels
             'Motivo'
         );
+    },
+    rechazar: function(button){
+        return alert("rechazar En construcción");
+        $.ajax({
+            url: DOMAIN + $(button).data('idPermiso'),
+            method: "GET",    
+            success: function(data){
+                
+            }
+        })
     },
     
 }
