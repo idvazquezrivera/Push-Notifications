@@ -30,6 +30,7 @@ var api = {
             dataType : 'json',
             crossDomain: true,
             error:function(response){
+                $("#loading").fadeOut();
 
                 var err = response.responseJSON;
                 if(!err || typeof err === "undefined")
@@ -56,7 +57,6 @@ var api = {
                         titulo_error,          
                         'Aceptar'                
                     );
-                    $("#loading").fadeOut();
 
             }, 
             beforeSend: function(xhr) { 

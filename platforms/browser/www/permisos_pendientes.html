@@ -21,15 +21,16 @@
         
     </head>
     <style>
-        .loading {
+        #loading {
             width: 100vw;
             background-image: url(images/loading.gif);
-            position: absolute;
             background-size: contain;
             height: 100vh;
             background-repeat: no-repeat;
             background-position: center;
             background-color: white;
+            position: fixed;
+    z-index: 9999;
         }
         
         
@@ -37,7 +38,7 @@
     </head>
 
     <body  class="fondo-login">
-        <div class="loading"></div>
+        <div id="loading"></div>
          <div class="barra_sup">
             <div class="row row-cols-2">
                 <div class="col">Permisos pendientes</div>

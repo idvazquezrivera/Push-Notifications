@@ -66,6 +66,7 @@ var api = {
             },
             error:function(err){
                 err = err.responseJSON;
+                $("#loading").fadeOut();
 
                 var message_error = err && err.hasOwnProperty('error_description') && typeof errores[err.error_description] != "undefined"? errores[err.error_description] : errores.descripcion_default;
                 var titulo_error = err && err.hasOwnProperty('error') && typeof  errores[err.error]  != "undefined"? errores[err.error] : errores.titulo_default
@@ -89,10 +90,14 @@ var api = {
                     location.href = "permisos_pendientes.html";
 
                 }
+                $("#loading").fadeOut();
+
             },
             beforeSend: function(xhr) { 
                 xhr.setRequestHeader("Authorization", "Basic " + btoa("foediapp:F0ed1@pp!20"));
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                $("#loading").fadeIn();
+
             },
         }); 
     }
