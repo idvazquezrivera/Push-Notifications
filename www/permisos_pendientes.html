@@ -1,12 +1,38 @@
-<!doctype html>
-<html lang="es">
-    <head>
-        <script>
-            if(!window.localStorage.getItem('session'))
-            {
-                location.href = "index.html";  
-            }            
-        </script>
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>        <script>
+        if(!window.localStorage.getItem('session'))
+        {
+            location.href = "index.html";  
+        }            
+    </script>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
         <title>FOEDI</title>
 
         <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
@@ -15,36 +41,18 @@
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/foediapp_styles.css">
+        <link rel="stylesheet" type="text/css" href="css/form-validations.css">
+        <link rel="stylesheet" type="text/css" href="css/extra.css">
 
-        <!-- /SCRIPT PARA EFECTO TOOLTIP -->
-
-        
     </head>
-    <style>
-        #loading {
-            width: 100vw;
-            background-image: url(images/loading.gif);
-            background-size: contain;
-            height: 100vh;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: white;
-            position: fixed;
-    z-index: 9999;
-        }
-        
-        
-      </style>
-    </head>
-
     <body  class="fondo-login">
         <div id="loading"></div>
-         <div class="barra_sup">
-            <div class="row row-cols-2">
-                <div class="col">Permisos pendientes</div>
-                <div class="col text-right"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /></div>
-              </div>    
-        </div>
+        <div class="barra_sup">
+            <div class="row">
+                <div class="col-8">Permisos pendientes</div>
+                <div class="col-4 text-right"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /></div>
+            </div> 
+        </div>   
         <form>
             <div class="form-group form-check m-2">
                 <input type="checkbox" class="form-check-input" id="seleccionarTodos">
@@ -70,9 +78,9 @@
                             <span>Fecha(s) por tomar:</span>
                             <strong class="fecha mb-3">20/02/2020 al 21/02/2020</strong>
 
-                            <button type="button"  class="btn btn-secondary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Ver permiso"><i class="far fa-eye"></i></button> 
+                            <button type="button"  onclick="api.ver(this)"  class="btn btn-secondary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Ver permiso"><i class="far fa-eye"></i></button> 
                             <button type="button" onclick="api.aprovar(this)" class="btn btn-primary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Aprobar permiso"><i class="fas fa-check"></i></button> 
-                            <button type="button"   class="btn btn-info btn-sm cuadro-btn"  data-toggle="tooltip" data-placement="top" title="Rechazar permiso"><i class="fas fa-exchange-alt"></i></button>
+                            <button type="button"   onclick="api.rechazar(this)" class="btn btn-info btn-sm cuadro-btn"  data-toggle="tooltip" data-placement="top" title="Rechazar permiso"><i class="fas fa-exchange-alt"></i></button>
                             <hr>
                         </div>
                     </div>    
@@ -90,10 +98,5 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/fontawesome.js"></script>
     <script type="text/javascript" src="js/permisos_pendientes.js"></script>
-
-    <script>
-        $(document).ready(function(){
-          $('[data-toggle="tooltip"]').tooltip();   
-        });
-    </script>
+ 
 </html>

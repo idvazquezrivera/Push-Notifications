@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>FOEDI</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/foediapp_styles.css">
+        <!-- /BOOTSTRAP -->
+        
+        <!-- SCRIPT PARA EFECTO TOOLTIP -->
+        <script>
+            $(document).ready(function(){
+              $('[data-toggle="tooltip"]').tooltip();   
+            });
+        </script>
+        <!-- /SCRIPT PARA EFECTO TOOLTIP -->
+        
+        <!-- FONTAWESOME PARA USO DE ÍCONOS -->
+        <script src="https://kit.fontawesome.com/29295b61c4.js" crossorigin="anonymous"></script>
+        
+    </head>
+
+    <body class="fondo-login">   
+        <!-- TITULOS HEADER -->
+        <div class="barra_sup">
+            <div class="row">
+                <div class="col-1"><a href="permisos_pendientes.html"><i class="fas fa-arrow-left"></i></a> </div>
+                <div class="col-8 text-center"> Permiso por puntualidad</div>
+                <div class="col-3 text-right"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /></div>
+              </div>    
+        </div>
+        <!-- /TITULOS HEADER -->     
+        <!-- DETALLE DEL PERMISO -->
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Estatus</strong>
+            <p>Vo. Bo. Dir General</p>
+            <hr>
+            <strong>Nombre</strong><br>
+            <strong>326 - Sergio Alejandro Rosales Ortega</strong>
+            <hr>
+            <strong>Puesto</strong>
+            <p>Analista de Sistemas</p>
+          </div>
+        </div>
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Área</strong>
+            <p>35.05.01 - Dirección de Sistemas</p>
+            <hr>
+            <strong>Dirección General</strong>
+            <p>35.05 - Dirección General de Tecnologías de la Información</p>
+            <hr>
+            <strong>Dependencia</strong>
+            <p>35 - Secretaría de Administración</p>
+          </div>
+        </div>
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Tipo de permiso</strong>
+            <p>Día de puntualidad</p>
+            <hr>
+            <strong>Fechas</strong>
+            <p>06/03/2020</p>
+            <hr>
+            <strong>Total días solicitados</strong>
+            <p>1 días hábiles</p>
+            <hr>
+            <strong>Periodo por día de puntualidad</strong>
+            <p>AGOSTO-SEPTIEMBRE-2019</p>
+          </div>
+        </div>
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Observaciones</strong>
+            <p>Se requiere solicitar el día para asistir a evento tecnológico.</p>
+          </div>
+        </div>
+        <!-- /DETALLE DEL PERMISO -->
+        <a href="#" class="btn btn-primary mt-2 mb-3 ml-3">APROBAR</a>
+        <a href="#" class="btn btn-danger mt-2 mb-3 ml-2">RECHAZAR</a>
+        
+    </body>
+    
+</html>

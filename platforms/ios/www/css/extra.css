@@ -1,0 +1,11 @@
+#loading {
+    width: 100vw;
+    background-image: url(images/loading.gif);
+    background-size: contain;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+    position: fixed;
+    z-index: 9999;
+}

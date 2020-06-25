@@ -1,0 +1,44 @@
+/* Estilos para APP FOEDI - Secretaría de Administración, 2020 
+AUTOR: Marcela López Zatarain
+*/
+
+
+/* Fondo login */
+.fondo-login {
+    background-color: #F9F9F9;
+}
+
+.barra_sup{
+    color: #fff;
+    padding: 15px;
+    background-color: #3B63AC;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Estilo para botones con iconos */
+.cuadro-btn{
+    width: 35px;
+    height: 35px;
+}
+
+/* Recuadro app */
+.recuadro_app{
+    background: #fff;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-left: none;
+    padding: 10px;
+}
+.permiso .descripcion span, .permiso .descripcion strong {
+    display:table;
+}
+.loading *{ 
+    background:lightgray!important;
+    color:lightgray!important;
+    border-color:lightgray!important;
+}
+.loading input[type=checkbox]{ 
+    display: none!important;
+}

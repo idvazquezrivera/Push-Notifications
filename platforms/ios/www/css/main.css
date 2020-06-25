@@ -1,0 +1,404 @@
+/* Guía Gráfica para Sistemas - Secretaría de Administración, 2019 */
+
+/* Codificación de texto */
+@charset 'utf-8';
+
+/* Fuente header */
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+/* Fuente de encabezados */
+@import 'https://fonts.googleapis.com/css?family=Lato:300,400,700,900';
+
+/* Fuente general */
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800';
+
+.titulo-header{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.625rem;
+    line-height: 1;
+    text-rendering: optimizelegibility;
+}
+
+body{
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  color: #4D5358;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+a, a:hover {
+    color: #0C615C;
+    text-decoration: none;
+}
+
+.tooltip { pointer-events: none; }
+
+
+/*--- ENCABEZADOS ---*/
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.25rem;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizelegibility;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizelegibility;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.75rem;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizelegibility;
+}
+
+h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.625rem;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizelegibility;
+}
+
+h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4375rem;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizelegibility;
+}
+
+h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1875rem;
+    font-style: normal;
+    line-height: 1.4;
+    text-rendering: optimizelegibility;
+}
+
+/*--- /ENCABEZADOS ---*/
+
+
+/*--- HEADER ---*/
+.menugraf{
+    background: #fff url("../images/header_admon_gris.png") no-repeat scroll;
+    height: 100px;
+    background-color: #d5d9db;
+    color: #fff;
+    padding: 0 20px;
+}
+/*--- /HEADER ---*/
+
+
+/*--- CITAS ---*/
+blockquote {
+    border-left: 5px solid #7D858B;
+    font-style: italic;
+}
+
+blockquote p {
+    margin: 0 0 0 10px;
+}
+/*--- CITAS ---*/
+
+
+/*--- BOTONES ---*/
+.btn-primary {
+    color: #fff;
+    background-color: #0C615C;
+    border-color: #0C615C;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #128881;
+    border-color: #128881;
+}
+
+.btn-primary:active {
+    color: #fff !important;
+    background-color: #128881 !important;
+    border-color: #128881 !important;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #4D5358;
+    border-color: #4D5358;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #087d40;
+    border-color: #087d40;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #A42C24;
+    border-color: #A42C24;
+}
+
+.btn-warning {
+    color: #000;
+    background-color: #F6C500;
+    border-color: #F6C500;
+}
+
+.btn-warning:hover {
+    color: #000;
+    background-color: #fdd329;
+    border-color: #fdd329;
+}
+
+.btn-warning:active {
+    color: #000;
+    background-color: #fdd329 !important;
+    border-color: #fdd329 !important;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #5F46A7;
+    border-color: #5F46A7;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #7d5ed6;
+    border-color: #7d5ed6;
+}
+
+.btn-info:active {
+    color: #fff;
+    background-color: #7d5ed6 !important;
+    border-color: #7d5ed6 !important;
+}
+
+.btn-link {
+    font-weight: 400;
+    color: #0C615C;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: #0C615C;
+    text-decoration: underline;
+}
+
+/* Botones delineados */
+.btn-outline-primary {
+    color: #0C615C;
+    border: 2px solid #0C615C;
+}
+
+.btn-outline-primary:hover {
+    color: #ffffff;
+    border: 2px solid #0C615C;
+    background-color: #0C615C;
+}
+
+.btn-outline-secondary {
+    color: #4D5358;
+    border: 2px solid #4D5358;
+}
+
+.btn-outline-secondary:hover {
+    color: #ffffff;
+    border: 2px solid #4D5358;
+    background-color: #4D5358;
+}
+
+.btn-outline-success {
+    color: #1B6125;
+    border: 2px solid #1B6125;
+}
+
+.btn-outline-success:hover {
+    color: #ffffff;
+    border: 2px solid #1B6125;
+    background-color: #1B6125;
+}
+
+.btn-outline-danger {
+    color: #A42C24;
+    border: 2px solid #A42C24;
+}
+
+.btn-outline-danger:hover {
+    color: #ffffff;
+    border: 2px solid #A42C24;
+    background-color: #A42C24;
+}
+
+.btn-outline-warning {
+    color: #3a2e01;
+    border: 2px solid #ffc107;
+}
+
+.btn-outline-info {
+    color: #5F46A7;
+    border: 2px solid #5F46A7;
+}
+
+.btn-outline-info:hover {
+    color: #ffffff;
+    border: 2px solid #5F46A7;
+    background-color: #5F46A7;
+}
+
+.btn-outline-light {
+    color: #f8f9fa;
+    border: 2px solid #f8f9fa;
+}
+
+.btn-outline-dark {
+    color: #343a40;
+    border: 2px solid #343a40;
+}
+
+
+/*--- /BOTONES ---*/
+
+/*--- CARD GRIS ---*/
+.card-gris {
+    color: #494F53;
+    background-color: #F2F2F2;
+    border: none;
+}
+/*--- CARD GRIS ---*/
+
+/*--- ALERTS ---*/
+.alert-primary {
+    color: #024688;
+    border: 2px solid #004C94;
+}
+
+.alert-secondary {
+    color: #41464A;
+    border: 2px solid #999a9a;
+}
+
+.alert-success {
+    color: #17531F;
+    border: 2px solid #31b344;
+}
+
+.alert-danger {
+    color: #80201A;
+    border: 2px solid #da3f34;
+}
+
+.alert-warning {
+    color: #3a2e01;
+    border: 2px solid #F6C500;
+}
+
+.alert-info {
+    color: #321f67;
+    background-color: #d6cdef;
+    border: 2px solid #5F46A7;
+}
+
+.alert-dark {
+    color: #000000;
+    background-color: #d6d8d9;
+    border: 2px solid #c6c8ca;
+}
+
+/*-- BACKGROUNDS --*/
+.bg-primary, .label-primary {
+    background-color: #0C615C!important;
+}
+
+.bg-info, .label-info {
+    background-color: #321f67!important;
+}
+
+/*--- PRE FORMATTED TEXT STYLES ---*/
+.cuadro-codigo {
+    padding: 20px;
+}
+
+.nt {
+    color: #2f6f9f;
+}
+
+.na {
+    color: #4f9fcf;
+}
+
+.s {
+    color: #e83e8c;
+}
+/*--- PRE FORMATTED TEXT STYLES ---*/
+
+
+/*--- FOOTER ---*/
+.fondo_footer{
+    background-color: #4D5358;
+    color: #fff;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.logo-admon{
+    height: 60px;
+}
+/*--- /FOOTER ---*/
+
+/***
+****************************************** Media queries ******************************************
+***/
+
+ /* Custom, iPhone Retina */ 
+    @media only screen and (min-width : 319px) {
+        .logos-header{
+            display: none;
+        } 
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (min-width : 481px) {
+        .logos-header{
+            display: none;
+        } 
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+        .logos-header{
+            display: none;
+        } 
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+       .logos-header{
+            display:inline;
+        } 
+
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+
+    }
+
+/***
+****************************************** /Media queries ******************************************
+***/

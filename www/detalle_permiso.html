@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <title>FOEDI</title>
+
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+
+        <link rel="stylesheet" href="css/bootstrap.css"> 
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/foediapp_styles.css">
+        <link rel="stylesheet" type="text/css" href="css/form-validations.css">
+        <link rel="stylesheet" type="text/css" href="css/extra.css">
+
+    </head>
+
+    <body class="fondo-login">   
+        <!-- TITULOS HEADER -->
+        <div class="barra_sup">
+            <div class="row">
+                <div class="col-1"><a href="permisos_pendientes.html"><i class="fas fa-arrow-left"></i></a> </div>
+                <div class="col-8 text-center"> Permiso por puntualidad</div>
+                <div class="col-3 text-right"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /></div>
+              </div>    
+        </div>
+        <!-- /TITULOS HEADER -->     
+        <!-- DETALLE DEL PERMISO -->
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Estatus</strong>
+            <p>Vo. Bo. Dir General</p>
+            <hr>
+            <strong>Nombre</strong><br>
+            <strong>326 - Sergio Alejandro Rosales Ortega</strong>
+            <hr>
+            <strong>Puesto</strong>
+            <p>Analista de Sistemas</p>
+          </div>
+        </div>
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Área</strong>
+            <p>35.05.01 - Dirección de Sistemas</p>
+            <hr>
+            <strong>Dirección General</strong>
+            <p>35.05 - Dirección General de Tecnologías de la Información</p>
+            <hr>
+            <strong>Dependencia</strong>
+            <p>35 - Secretaría de Administración</p>
+          </div>
+        </div>
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Tipo de permiso</strong>
+            <p>Día de puntualidad</p>
+            <hr>
+            <strong>Fechas</strong>
+            <p>06/03/2020</p>
+            <hr>
+            <strong>Total días solicitados</strong>
+            <p>1 días hábiles</p>
+            <hr>
+            <strong>Periodo por día de puntualidad</strong>
+            <p>AGOSTO-SEPTIEMBRE-2019</p>
+          </div>
+        </div>
+        <div class="card m-2">
+          <div class="card-body">
+            <strong>Observaciones</strong>
+            <p>Se requiere solicitar el día para asistir a evento tecnológico.</p>
+          </div>
+        </div>
+        <!-- /DETALLE DEL PERMISO -->
+        <a href="#" class="btn btn-primary mt-2 mb-3 ml-3">APROBAR</a>
+        <a href="#" class="btn btn-danger mt-2 mb-3 ml-2">RECHAZAR</a>
+        
+      </body>
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript" src="js/popper.js"></script>
+      <script type="text/javascript" src="js/bootstrap.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/fontawesome.js"></script>
+      <script type="text/javascript" src="js/permisos_pendientes.js"></script>
+   
+  </html>

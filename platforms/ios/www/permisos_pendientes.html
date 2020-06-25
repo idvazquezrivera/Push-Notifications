@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <script>
+            if(!window.localStorage.getItem('session'))
+            {
+                location.href = "index.html";  
+            }            
+        </script>
+        <title>FOEDI</title>
+
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+
+        <link rel="stylesheet" href="css/bootstrap.css"> 
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/extra.css">
+
+        <link rel="stylesheet" type="text/css" href="css/foediapp_styles.css">
+
+        <!-- /SCRIPT PARA EFECTO TOOLTIP -->
+
+        
+    </head>
+    <style>
+ 
+        
+      </style>
+    </head>
+
+    <body  class="fondo-login">
+        <div id="loading"></div>
+        <div class="barra_sup">
+            <div class="row row-cols-2">
+                <div class="colAQQ">Permisos pendientes</div>
+                <div class="col text-right"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /></div>
+            </div>    
+        </div>
+        <form>
+            <div class="form-group form-check m-2">
+                <input type="checkbox" class="form-check-input" id="seleccionarTodos">
+                <label class="form-check-label" for="seleccionarTodos">Seleccionar todos</label>
+            </div> 
+            <div class="recuadro_app">
+                <!-- DATOS PERSONAL -->
+                <div class="containers" id="PermisosPendientes">
+                    <!-- Dato de la persona -->
+                    <div class="ml-4 permiso" id="Permiso">
+                        <div class="seleccionar loading">
+                            <input type="checkbox" class="form-check-input">
+                        </div>
+                        <div class="descripcion loading">
+                            <strong class="mb-1 idPermiso"></strong>
+                            <span >Nombre y área:</span>
+                            <strong><a href="#" class="solicitante">Sergio Alejandro Rosales Ortega</a></strong>
+                            <span class="area mb-2">Dirección de Sistemas</span>
+                           
+                            <span>Permiso:</span>
+                            <strong class="tipoPermiso mb-2">Día Económico</strong>
+
+                            <span>Fecha(s) por tomar:</span>
+                            <strong class="fecha mb-3">20/02/2020 al 21/02/2020</strong>
+
+                            <button type="button"  class="btn btn-secondary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Ver permiso"><i class="far fa-eye"></i></button> 
+                            <button type="button" onclick="api.aprovar(this)" class="btn btn-primary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Aprobar permiso"><i class="fas fa-check"></i></button> 
+                            <button type="button"   class="btn btn-info btn-sm cuadro-btn"  data-toggle="tooltip" data-placement="top" title="Rechazar permiso"><i class="fas fa-exchange-alt"></i></button>
+                            <hr>
+                        </div>
+                    </div>    
+                </div>
+                <!-- /DATOS PERSONAL -->
+            </div>
+            <a href="javascript:api.aprovar_varios()" class="btn btn-primary mt-3 ml-3">APROBAR</a>
+            <a href="#" class="btn btn-danger mt-3 ml-2">RECHAZAR</a>
+        </form> 
+        
+    </body>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/popper.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/fontawesome.js"></script>
+    <script type="text/javascript" src="js/permisos_pendientes.js"></script>
+
+    <script>
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();   
+        });
+    </script>
+</html>

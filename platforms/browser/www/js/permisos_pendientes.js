@@ -123,7 +123,7 @@ var api = {
     },
     aprovar: function(button){
         navigator.notification.confirm(
-            'A', // message
+            'Aprobar el permiso '+$("#idPermiso"+ids[x]).text(), // message
              function(results){
                 if(results == 2/*<-cancelar*/){
                     return;
@@ -171,6 +171,8 @@ var api = {
                         for(x in ids){
                             $("#idPermiso"+ids[x]).fadeOut();
                             console.log("#idPermiso"+ids[x]);
+                            console.log("#idPermiso"+x);
+                            console.log(ids[x]);
                         };
                 
                     }
@@ -183,26 +185,37 @@ var api = {
 
     },
     rechazar_varios: function(button){
-        return alert("rechazar_varios En construcción");
-
-        navigator.notification.prompt(
-            'Motivo ', // message
+        navigator.notification.confirm(
+            'Motivo de rechazo varios permisos?', // message
              function(results){
+                if(results == 2/*<-cancelar*/){
+                    return;
+                }
+                var ids = [];
+                $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
+                    if($(e).is(':checked')){
+                        ids.push($(e).attr('data-idpermiso'));
+                    }
+                });
                  $.ajax({
-                     url: DOMAIN + $(button).attr('data-idPermiso') + '/negaciones',
-                     method: "PUT",    
-                     success: function(data){
-                         $("#idPermiso"+$(button).attr('data-idPermiso')).fadeOut();
+                    url: DOMAIN + 'autorizaciones/varios',
+                    data:{ids: ids },
+                    method: "PUT",    
+                    success: function(data){
+                        for(x in ids){
+                            $("#idPermiso"+ids[x]).fadeOut();
+                            console.log("#idPermiso"+ids[x]);
+                        };
+                
                     }
                 })
-             },
+            },
              $(button).parent().find('.tipoPermiso').html(),           // title
-            ['Rechazar','Cancelar'],    // buttonLabels
-            'Motivo'
+            ['Si','No']     // buttonLabels
         );
+        $("#loading").fadeOut();
     },
     rechazar: function(button){
-        return alert("rechazar En construcción");
         $.ajax({
             url: DOMAIN + $(button).data('idPermiso'),
             method: "GET",    
