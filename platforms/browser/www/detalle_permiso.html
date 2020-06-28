@@ -1,31 +1,44 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
     <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
         <title>FOEDI</title>
-        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <!-- BOOTSTRAP -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/foediapp_styles.css">
-        <!-- /BOOTSTRAP -->
-        
-        <!-- SCRIPT PARA EFECTO TOOLTIP -->
-        <script>
-            $(document).ready(function(){
-              $('[data-toggle="tooltip"]').tooltip();   
-            });
-        </script>
-        <!-- /SCRIPT PARA EFECTO TOOLTIP -->
-        
-        <!-- FONTAWESOME PARA USO DE ÍCONOS -->
-        <script src="https://kit.fontawesome.com/29295b61c4.js" crossorigin="anonymous"></script>
-        
+
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+
+        <link rel="stylesheet" href="css/bootstrap.css"> 
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/foediapp_styles.css">
+        <link rel="stylesheet" type="text/css" href="css/form-validations.css">
+        <link rel="stylesheet" type="text/css" href="css/extra.css">
+
     </head>
 
     <body class="fondo-login">   
@@ -88,6 +101,12 @@
         <a href="#" class="btn btn-primary mt-2 mb-3 ml-3">APROBAR</a>
         <a href="#" class="btn btn-danger mt-2 mb-3 ml-2">RECHAZAR</a>
         
-    </body>
-    
-</html>
+      </body>
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript" src="js/popper.js"></script>
+      <script type="text/javascript" src="js/bootstrap.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/fontawesome.js"></script>
+      <script type="text/javascript" src="js/permisos_pendientes.js"></script>
+   
+  </html>

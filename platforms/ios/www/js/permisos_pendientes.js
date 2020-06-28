@@ -21,7 +21,7 @@ document.addEventListener("deviceready", function() {
     });
     console.log($("input[type='checkbox']").is(':checked'));
 
-    $("#AprovarVarios").click(api.aprovar_varios);
+    $("#AprobarVarios").click(api.aprobar_varios);
 
 }, false);
 
@@ -121,7 +121,7 @@ var api = {
             }
         })
     },
-    aprovar: function(button){
+    aprobar: function(button){
         navigator.notification.confirm(
             'Aprobar el permiso '+$("#idPermiso"+ids[x]).text(), // message
              function(results){
@@ -149,7 +149,7 @@ var api = {
         );
         
     },
-    aprovar_varios: function(button){
+    aprobar_varios: function(button){
  
         navigator.notification.confirm(
             '¿Deseas aprobar varios permisos?', // message
@@ -160,7 +160,7 @@ var api = {
                 var ids = [];
                 $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
                     if($(e).is(':checked')){
-                        ids.push($(e).attr('data-idpermiso'));
+                        ids.push($(e).attr('data-idPermiso'));
                     }
                 });
                  $.ajax({

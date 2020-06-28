@@ -18,7 +18,12 @@
     under the License.
 -->
 <html>
-    <head>
+    <head>        <script>
+        if(!window.localStorage.getItem('session'))
+        {
+            location.href = "index.html";  
+        }            
+    </script>
         <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
@@ -73,17 +78,17 @@
                             <span>Fecha(s) por tomar:</span>
                             <strong class="fecha mb-3">20/02/2020 al 21/02/2020</strong>
 
-                            <button type="button"  onclick="api.ver(this)"  class="btn btn-secondary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Ver permiso"><i class="far fa-eye"></i></button> 
-                            <button type="button" onclick="api.aprovar(this)" class="btn btn-primary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Aprobar permiso"><i class="fas fa-check"></i></button> 
-                            <button type="button"   onclick="api.rechazar(this)" class="btn btn-info btn-sm cuadro-btn"  data-toggle="tooltip" data-placement="top" title="Rechazar permiso"><i class="fas fa-exchange-alt"></i></button>
+                            <button type="button" onclick="api.ver(this)"  class="btn btn-secondary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Ver permiso"><i class="far fa-eye"></i></button> 
+                            <button type="button" onclick="api.aprobar(this)" class="btn btn-primary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Aprobar permiso"><i class="fas fa-check"></i></button> 
+                            <button type="button" onclick="api.rechazar(this)" class="btn btn-info btn-sm cuadro-btn"  data-toggle="tooltip" data-placement="top" title="Rechazar permiso"><i class="fas fa-exchange-alt"></i></button>
                             <hr>
                         </div>
                     </div>    
                 </div>
                 <!-- /DATOS PERSONAL -->
             </div>
-            <a href="javascript:api.aprovar_varios()" class="btn btn-primary mt-3 ml-3">APROBAR</a>
-            <a href="#" class="btn btn-danger mt-3 ml-2">RECHAZAR</a>
+            <input id="AprobarVarios" type="button" class="btn btn-primary mt-3 ml-3" value="APROBAR" />
+            <input type="button"  class=" btn btn-danger mt-3 ml-2" value ="RECHAZAR" />
         </form> 
         
     </body>

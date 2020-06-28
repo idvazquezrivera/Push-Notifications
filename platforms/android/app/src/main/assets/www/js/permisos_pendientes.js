@@ -13,7 +13,7 @@ document.addEventListener("deviceready", function() {
         });
     });
     
-    $("#AprovarVarios").click(api.aprovar_varios);
+    $("#AprobarVarios").click(api.aprobar_varios);
 
 }, false);
 
@@ -92,7 +92,7 @@ var api = {
             }
         })
     },
-    aprovar: function(button){
+    aprobar: function(button){
         navigator.notification.confirm(
             'Aprobar', // message
              function(results){
@@ -114,7 +114,7 @@ var api = {
         );
         
     },
-    aprovar_varios: function(button){
+    aprobar_varios: function(button){
  
         navigator.notification.confirm(
             'Aprobar', // message
@@ -125,7 +125,7 @@ var api = {
                 var ids = [];
                 $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
                     if($(e).is(':checked'));
-                        ids.push($(e).attr('data-idpermiso'));
+                        ids.push($(e).attr('data-idPermiso'));
                 });
                  $.ajax({
                     url: DOMAIN + 'autorizaciones/varios',
@@ -134,7 +134,7 @@ var api = {
                     success: function(data){
                         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
                             $(e).attr('checked', $(self).is(':checked'));
-                                $("#idPermiso"+$(e).attr('data-idpermiso')).fadeOut();
+                                $("#idPermiso"+$(e).attr('data-idPermiso')).fadeOut();
                         });
                     }
                 })
