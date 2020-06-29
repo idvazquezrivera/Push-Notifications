@@ -201,9 +201,8 @@ var api = {
                     $.ajax({
                         url: DOMAIN + idPermiso + '/negaciones',
                         method: "PUT",    
-                        data{motivo: result1},
+                        data: {motivo: result1},
                         success: function(data){
-                            $("#Permiso"+$(button).attr('data-idPermiso')).fadeOut();
                             navigator.notification.alert(
                                 "El permiso fue rechazado con éxito.",  
                                 function(){ $("#loading").fadeOut(); $("#Permiso"+idPermiso).fadeOut()},        
@@ -211,11 +210,11 @@ var api = {
                                 'Aceptar'                
                             );
 
-
                         }
                     }) 
                 }
-  
+
+        
              },
              $(button).parent().find('.tipoPermiso').html(),           // title
             ['Aprovar','Cancelar']     // buttonLabels
