@@ -18,7 +18,8 @@
     under the License.
 -->
 <html>
-    <head>        <script>
+    <head>        
+    <script>
         if(!window.localStorage.getItem('session'))
         {
             location.href = "index.html";  
@@ -48,14 +49,15 @@
     <body  class="fondo-login">
         <div id="loading"></div>
         <div class="barra_sup">
-            <div class="row">
-                <div class="col-8">Permisos pendientes</div>
-                <div class="col-4 text-right"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /></div>
+            <div class="row p-0 m-0">
+                <div class="col-1"><a href="index.html"><i class="fas fa-arrow-left"></i></a> </div>
+                <div class="col-10">Permisos pendientes</div>
+                <div class="col-1"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /></div>
             </div> 
         </div>   
         <form>
             <div class="form-group form-check m-2">
-                <input type="checkbox" class="form-check-input" id="seleccionarTodos">
+                <input readonly disabled type="checkbox" class="form-check-input" id="seleccionarTodos">
                 <label class="form-check-label" for="seleccionarTodos">Seleccionar todos</label>
             </div> 
             <div class="recuadro_app">
@@ -87,8 +89,8 @@
                 </div>
                 <!-- /DATOS PERSONAL -->
             </div>
-            <input id="AprobarVarios" type="button" class="btn btn-primary mt-3 ml-3" value="APROBAR" />
-            <input type="button"  class=" btn btn-danger mt-3 ml-2" value ="RECHAZAR" />
+            <input type="button" readonly disabled id="AprobarVarios" onclick="api.aprobar_varios(0)" class="btn btn-primary mt-3 ml-3" value="APROBAR" />
+            <input type="button" class="btn btn-danger mt-3 ml-2" value ="RECHAZAR" />
         </form> 
         
     </body>

@@ -7,7 +7,9 @@ AUTOR: Marcela López Zatarain
 .fondo-login {
     background-color: #F9F9F9;
 }
-
+.barra_sup i {
+    color: #fff;
+}
 .barra_sup{
     color: #fff;
     padding: 15px;
