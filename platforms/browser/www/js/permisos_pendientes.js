@@ -6,13 +6,32 @@ document.addEventListener("deviceready", function() {
     api.init();
     $("#checkedAll").change(function(){
         if(this.checked){
+            $("#checkedAll").removeAttr('disabled')
+            $("#checkedAll").removeAttr('readonly');
+
+            $("#AprobarVarios").removeAttr('disabled');
+            $("#AprobarVarios").removeAttr('readonly');
+            $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(1)')
+
+            $("#RechazarVarios").removeAttr('disabled');
+            $("#RechazarVarios").removeAttr('readonly');
+            $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(1)')
+
           $(".checkSingle").each(function(){
             this.checked=true;
           })              
         }else{
-          $(".checkSingle").each(function(){
-            this.checked=false;
-          })              
+
+            $("#AprobarVarios").attr('disabled');
+            $("#AprobarVarios").attr('readonly');
+            $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(0)')
+
+            $("#RechazarVarios").attr('disabled');
+            $("#RechazarVarios").attr('readonly');
+            $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(0)')
+            $(".checkSingle").each(function(){
+                this.checked=false;
+            })              
         }
       });
     
@@ -55,14 +74,6 @@ var api = {
                 if(permisos.length)
                 {
                     var clones = [];
-                    $("#checkedAll").removeAttr('disabled')
-                    $("#checkedAll").removeAttr('readonly');
-
-                    $("#AprobarVarios").removeAttr('disabled');
-                    $("#AprobarVarios").removeAttr('readonly');
-                    $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(1)')
-
-
                     for(x in permisos){
                         _p = permisos[x];
                         clones[x] = permiso.clone(); 
@@ -81,17 +92,20 @@ var api = {
                         clones[x].find('.loading').removeClass('loading');
                         $(".checkSingle").click(function () {
                             if ($(this).is(":checked")){
-                              var isAllChecked = 0;
+                              var AllChecked = 0;
+                              console.log("d1");
                               $(".checkSingle").each(function(){
                                 if(!this.checked){
-                                    isAllChecked = 1;
-                                    $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(1)')
-
+                                    AllChecked = 1;
                                 }
-                              })              
-                              if(isAllChecked == 0){ $("#checkedAll").prop("checked", true); }     
+                            })              
+                            if(AllChecked ==2){
+                                $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(1)');
+                                $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(1)');
+                            }     
                             }else {
-                                $("#checkedAll").removeAttr("checked");
+                                $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(0)');
+                                $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(0)');
                             }
                         });
                        
@@ -198,32 +212,32 @@ var api = {
         );
     },
     rechazar_varios: function(button){
-    navigator.notification.prompt(
-        '¿Deseas rechazar varios permisos?', // message
-            function(){
-            if(results.buttonIndex === 1){
-                var ids = [];
-                $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-                    if($(e).is(':checked')){
-                        ids.push($(e).attr('data-idPermiso'));
-                    }
-                });
-                $.ajax({
-                    url: DOMAIN + 'negaciones/varios',
-                    data:{ids: ids.join(),motivo: results.input1 },
-                    method: "PUT",    
-                    success: function(data){
-                        for(x in ids){
-                            $("#Permiso"+ids[x]).fadeOut();
-                        };
-                
-                    }
-                })
-            }
-        },
-            $(button).parent().find('.tipoPermiso').html(),           // title
-        ['Si','No']     // buttonLabels
-    );
-    $("#loading").fadeOut();
-},
+        navigator.notification.prompt(
+            '¿Deseas rechazar varios permisos?', // message
+                function(){
+                if(results.buttonIndex === 1){
+                    var ids = [];
+                    $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
+                        if($(e).is(':checked')){
+                            ids.push($(e).attr('data-idPermiso'));
+                        }
+                    });
+                    $.ajax({
+                        url: DOMAIN + 'negaciones/varios',
+                        data:{ids: ids.join(),motivo: results.input1 },
+                        method: "PUT",    
+                        success: function(data){
+                            for(x in ids){
+                                $("#Permiso"+ids[x]).fadeOut();
+                            };
+                    
+                        }
+                    })
+                }
+            },
+            'Rechazar Masivo',           // title
+            ['Si','No']     // buttonLabels
+        );
+        $("#loading").fadeOut();
+    }
 }
