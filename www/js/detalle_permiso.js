@@ -42,12 +42,10 @@ var api = {
                     for(x in permiso){
                         if(permiso[x]){
                             $("." + x).html(permiso[x]);
-                            $("." + x).parent()[1].fadeIn();
-                            console.log($("." + x).parent());
+                            $('#item_' + x).removeClass('d-none')
                         }
                     }
                 }
-                console.log(permiso);
             },
         }); 
     },

@@ -51,9 +51,9 @@
         <!-- TITULOS HEADER -->
         <div class="barra_sup">
             <div class="row p-0 m-0">
-                <div class="col-2"><a href="permisos_pendientes.html"><i class="fas fa-arrow-left"></i></a> </div>
-                <div class="col-8 text-center"> Permiso por puntualidad</div>
-                <div class="col-2 text-right"><img alt="Imagen FOEDI"  src="images/icono_foedi.png" /></div>
+              <div class="col-1  p-0 m-0 "><img alt="Imagen FOEDI"  src="images/icono_foedi.png" /></div>
+              <div class="col-10 p-0 m-0 text-center"> Permiso por puntualidad</div>
+              <div class="col-1 p-0 m-0 text-right"><a href="permisos_pendientes.html"><i class="fad fa-arrow-left"></i></i></a> </div>
               </div>    
         </div>
         <!-- /TITULOS HEADER -->     
@@ -61,22 +61,22 @@
         <!-- DETALLE DEL PERMISO -->
         <div class="card m-2">
           <div class="card-body">
-            <div class="item d-none">
+            <div id="item">
               <strong>Estatus</strong>
-              <p class="estatus"></p>>
+              <p class="estatus"></p>
               <hr>
             </div>
-            <div class="item d-none">
+            <div id="item">
               <strong>Nombre</strong>
               <stron><span class="idPermiso"></span> - <span class="solicitante"> </span></stron></p>
               <hr>
             </div>
-            <div class="item d-none">
+            <div id="item">
               <strong>Puesto</strong>
               <p class="puesto"> </p>
               <hr>
             </div>
-            <div class="item d-none">
+            <div id="item">
               <strong>Área</strong>
               <p class="area"></p>
             </div>
@@ -84,22 +84,22 @@
         </div>
         <div class="card m-2">
           <div class="card-body">
-            <div class="item d-none">
+            <div id="item">
               <strong>Tipo de permiso</strong>
               <p class="tituloPermiso"> </p>
               <hr>
             </div>
-            <div class="item d-none">
+            <div class="d-none" id="item_fechaInicio">
               <strong>Fechas</strong>
               <span class="fechaInicio"></span> - <span class="fechaFin"></span></p>
               <hr>
             </div>
-            <div class="item d-none">
+            <div class="d-none" id="item_diasSolicitados">
               <strong>Total días solicitados</strong>
               <p class="diasSolicitados"> </p>
               <hr>
             </div>
-            <div class="item d-none">
+            <div class="d-none" id="item_descripcionPeriodo">
               <strong>Periodo</strong>
               <p class="descripcionPeriodo"> </p>
             </div>
@@ -108,52 +108,52 @@
         
         <div class="card m-2">
           <div class="card-body">
-            <div class="item d-none">  
-              <strong>salida</strong>
+            <div class="d-none" id="item_salida">  
+              <strong>Salida</strong>
               <p class="salida"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>entrada</strong>
+            <div class="d-none" id="item_entrada">  
+              <strong>Entrada</strong>
               <p class="entrada"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>asunto</strong>
+            <div class="d-none" id="item_asunto">  
+              <strong>Asunto</strong>
               <p class="asunto"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>descripcionPeriodo</strong>
+            <div class="d-none" id="item_descripcionPeriodo">  
+              <strong>Descripcion Periodo</strong>
               <p class="descripcionPeriodo"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>totalHoras</strong>
+            <div class="d-none" id="item_totalHoras">  
+              <strong>Total de Horas</strong>
               <p class="totalHoras"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>lugarComision</strong>
+            <div class="d-none" id="item_lugarComision">  
+              <strong>Lugar de Comision</strong>
               <p class="lugarComision"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>horarioInicio</strong>
+            <div class="d-none" id="item_horarioInicio">  
+              <strong>Horario Inicio</strong>
               <p class="horarioInicio"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>horarioFin</strong>
+            <div class="d-none" id="item_horarioFin">  
+              <strong>Horario Fin</strong>
               <p class="horarioFin"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
-              <strong>descripcionComision</strong>
+            <div class="d-none" id="item_descripcionComision">  
+              <strong>Descripcion Comision</strong>
               <p class="descripcionComision"> </p>
               <hr>
             </div>
-            <div class="item d-none">  
+            <div class="d-none" id="item_Observaciones">  
               <strong>Observaciones</strong>
               <p class="observacion"> </p>
             </div>
