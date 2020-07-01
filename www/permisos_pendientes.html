@@ -38,6 +38,7 @@
 
         <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
 
+        <link rel="stylesheet" type="text/css" href="css/materialize.css">
         <link rel="stylesheet" href="css/bootstrap.css"> 
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -69,7 +70,8 @@
                             <input type="checkbox"  name="checkAll" class="checkSingle form-check-input">
                         </div>
                         <div class="descripcion loading">
-                            <strong class="mb-1 idPermiso"></strong>
+                            <strong class=-input" name="checkedAll" id="checkedAll" >
+                                <label class="form-check-lamb-1 idPermiso"></strong>
                             <span >Nombre y área:</span>
                             <strong><a href="#" class="solicitante">Sergio Alejandro Rosales Ortega</a></strong>
                             <span class="area mb-2">Dirección de Sistemas</span>
@@ -80,17 +82,38 @@
                             <span>Fecha(s) por tomar:</span>
                             <strong class="fecha mb-3">20/02/2020 al 21/02/2020</strong>
 
-                            <button type="button" onclick="api.ver(this)"  class="ver btn btn-secondary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Ver permiso"><i class="far fa-eye"></i></button> 
-                            <button type="button" onclick="api.aprobar(this)" class="aprobar btn btn-primary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Aprobar permiso"><i class="fas fa-check"></i></button> 
-                            <button type="button" onclick="api.rechazar(this)" class="rechazar btn btn-info btn-sm cuadro-btn"  data-toggle="tooltip" data-placement="top" title="Rechazar permiso"><i class="fas fa-exchange-alt"></i></button>
+                            <button type="button" onclick="api.ver(this)"  class="ver btn btn-secondary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Ver permiso">
+                                <i class="fad fa-eye"></i>
+                            </button> 
+                            <button type="button" onclick="api.aprobar(this)" class="aprobar btn btn-primary btn-sm cuadro-btn" data-toggle="tooltip" data-placement="top" title="Aprobar permiso">
+                                <i class="fad fa-check"></i>
+                            </button> 
+                            <button type="button" onclick="api.rechazar(this)" class="rechazar btn btn-info btn-sm cuadro-btn"  data-toggle="tooltip" data-placement="top" title="Rechazar permiso">
+                                <i class="fad fa-exchange"></i></i
+                                ></button>
                             <hr>
                         </div>
                     </div>    
                 </div>
                 <!-- /DATOS PERSONAL -->
             </div>
-            <input type="button" readonly disabled id="AprobarVarios" onclick="api.aprobar_varios(0)" class="btn btn-primary mt-3 ml-3" value="APROBAR" />
-            <input type="button" readonly disabled id="RechazarVarios" onclick="api.rechazar_varios(0)" class="btn btn-danger mt-3 ml-2" value ="RECHAZAR" />
+
+                    <!----
+            <div class="fixed-bottom">
+            <input type="button" readonly disabled  class="cuadro-btn btn-block" value="APROBAR" />
+                <input type="button" readonly disabled  class="btn-block" value ="RECHAZAR" />
+            </div>
+            --->
+            <div class="fixed-action-btn toolbar direction-top" style="transition: transform 0.2s ease 0s; transform: translate3d(0px, 0px, 0px);">
+                <a class="btn-floating btn-large" style="background:#3B63AC; transition: transform 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0s; transform: translate3d(0px, 0px, 0px);">
+                    <i class="fad fa-bars"></i>Menu</i>
+                </a>
+                <ul>
+                  <li class="waves-effect waves-light"><a id="AprobarVarios" onclick="api.aprobar_varios(0)" style="background:#0C615C;"><i class="fad fa-check"></i> Aprobar</i></a></li>
+                  <li class="waves-effect waves-light"><a id="RechazarVarios" onclick="api.rechazar_varios(0)"  style="background:#5F46A7;"><i class="fad fa-exchange"></i> Rechazar</i></a></li>
+                  <li class="waves-effect waves-light"><a href="index.html" style="background:#3B63AC;"><i class="fad fa-sign-out-alt"></i> Salir</i></a></li>
+                </ul>
+              </div>
         </form> 
         
     </body>
@@ -100,5 +123,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/fontawesome.js"></script>
     <script type="text/javascript" src="js/permisos_pendientes.js"></script>
- 
+    <script type="text/javascript" src="js/materialize.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+
 </html>

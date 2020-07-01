@@ -34,9 +34,8 @@ document.addEventListener("deviceready", function() {
             })              
         }
       });
-    
-     
 }, false);
+
 var api = {
     init: function(){
         $.ajaxSetup({
@@ -46,7 +45,7 @@ var api = {
                 response = err.responseJSON;                
                 navigator.notification.alert(
                     response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion",  
-                    function(){if(err.error == 'invalid_token') {window.location = 'index.html';}; $("#loading").fadeOut();},       
+                    function(){if(err.error == 'invalid_token') {window.location = 'index.html';};},       
                     response && response.hasOwnProperty('error') ? response.error : 'Error',          
                     'Aceptar'                
                 );  
@@ -69,7 +68,7 @@ var api = {
                 var permisos = response;
                 var permiso = $("#Permiso");
                 var lista = $("#PermisosPendientes");
-                permiso.css('display','none');   
+                permiso.css('display','none');   $("#loading").fadeOut();
 
                 if(permisos.length)
                 {
@@ -91,21 +90,36 @@ var api = {
                         clones[x].find('.form-check-input').attr('data-idPermiso',_p.idPermiso);
                         clones[x].find('.loading').removeClass('loading');
                         $(".checkSingle").click(function () {
-                            if ($(this).is(":checked")){
-                              var AllChecked = 0;
-                              console.log("d1");
-                              $(".checkSingle").each(function(){
-                                if(!this.checked){
+                            var AllChecked = 0;
+                            var items = 0;
+                            var items_checked = 0;
+                            $(".checkSingle").each(function(){
+                                if(this.checked){
                                     AllChecked = 1;
-                                }
-                            })              
-                            if(AllChecked ==2){
+                                    items_checked++;
+                                }      
+                                items++;                      
+                            })    
+                            
+                            if(items_checked != items)
+                            {
+                                $("#checkedAll").each(function(){
+                                    this.checked=false;
+                                })              
+                            }
+                            if(items_checked == items)
+                            {
+                                $("#checkedAll").each(function(){
+                                    this.checked=true;
+                                })              
+                            }
+                            console.log(AllChecked);
+                            if(AllChecked >= 1){
                                 $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(1)');
-                                $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(1)');
-                            }     
-                            }else {
+                                $("#RechazarVarios").attr('onclick', 'api.rechazar_varios(1)');
+                            }else{
                                 $("#AprobarVarios").attr('onclick', 'api.aprobar_varios(0)');
-                                $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(0)');
+                                $("#RechazarVarios").attr('onclick', 'api.rechazar_varios(0)');
                             }
                         });
                        
@@ -124,7 +138,7 @@ var api = {
     aprobar: function(button){
         var idPermiso =  $(button).attr('data-idPermiso');
         navigator.notification.confirm(
-            '¿Aprobar el permiso No.'+ idPermiso+'?', // message
+            '¿Aprobar el permiso No.'+ idPermiso+'?', 
              function(results){
                  console.log(results)
                  if(results == 1){
@@ -133,15 +147,14 @@ var api = {
                         method: "PUT",    
                         success: function(data){
                             navigator.notification.alert(
-                                "El permiso fue autorizado con éxito.",  
-                                function(){ $("#loading").fadeOut(); $("#Permiso"+idPermiso).fadeOut()}, 
-                                "Autorizado",          
+                                "El permiso fue aprobado con éxito.",  
+                                function(){location.href = "permisos_pendientes.html";},        
+                                "Aprobado",          
                                 'Aceptar'                
                             );
                         }
                     })
                 }
-
             },
             $("#Permiso"+idPermiso).find('.tipoPermiso').html(),      
             ['Si','No']
@@ -153,39 +166,40 @@ var api = {
             navigator.notification.alert("No hay permisos seleccionados.", null, "Error", "Aceptar");
             return;
         }
+        var ids = [];
+        $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
+            if($(e).is(':checked')){
+                ids.push($(e).attr('data-idPermiso'));
+            }
+        });
         navigator.notification.confirm(
-            '¿Deseas aprobar varios permisos?', // message
+            '¿Deseas aprobar los permisos No. ' + ids.join(' y ') +' ?', 
              function(results){
-                if(results === 1){
-                    var ids = [];
-                    $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-                        if($(e).is(':checked')){
-                            ids.push($(e).attr('data-idPermiso'));
-                        }
-                    });
+                if(results === 1){    
                     $.ajax({
                         url: DOMAIN + 'autorizaciones/varios',
                         data:{ids: ids.join() },
                         method: "PUT",    
                         success: function(data){
-                            for(x in ids){
-                                $("#Permiso"+ids[x]).fadeOut();
-                            };
-                    
+                            navigator.notification.alert(
+                                "El permiso fue aprobado con éxito.",  
+                                function(){location.href = "permisos_pendientes.html";},        
+                                "Aprobado",          
+                                'Aceptar'                
+                            );
                         }
                     })
-                }
-                
+                } 
             },
-            'Aprobar masivo',          // title
-            ['Si','No']     // buttonLabels
+            'Aprobar masivo',          
+            ['Si','No']     
         );
         $("#loading").fadeOut();
     },
     rechazar: function(button){
         var idPermiso =  $(button).attr('data-idPermiso');
         navigator.notification.prompt(
-            'Escribe un motivo de rechazo el permiso  No.' +idPermiso , // message
+            'Escribe un motivo de rechazo el permiso  No.' +idPermiso  +' ?',
              function(results){
                  console.log(results)
                 if(results.buttonIndex === 1){
@@ -196,47 +210,46 @@ var api = {
                         success: function(data){
                             navigator.notification.alert(
                                 "El permiso fue rechazado con éxito.",  
-                                function(){                         location.href = "permisos_pendientes.html";},        
+                                function(){location.href = "permisos_pendientes.html";},        
                                 "Rechazado",          
                                 'Aceptar'                
                             );
-
                         }
                     }) 
                 }
-
-        
-             },
-             $(button).parent().find('.tipoPermiso').html(),           // title
-            ['Aprovar','Cancelar']     // buttonLabels
+            },
+            $(button).parent().find('.tipoPermiso').html(),           
+            ['Aprovar','Cancelar']     
         );
     },
     rechazar_varios: function(button){
+        var ids = [];
+        $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
+            if($(e).is(':checked')){
+                ids.push($(e).attr('data-idPermiso'));
+            }
+        });
         navigator.notification.prompt(
-            '¿Deseas rechazar varios permisos?', // message
+            '¿Deseas rechazar los permisos No. ' + ids.join(' y ') +' ?', 
                 function(){
-                if(results.buttonIndex === 1){
-                    var ids = [];
-                    $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-                        if($(e).is(':checked')){
-                            ids.push($(e).attr('data-idPermiso'));
-                        }
-                    });
+                if(results.buttonIndex === 1){                    
                     $.ajax({
-                        url: DOMAIN + 'negaciones/varios',
-                        data:{ids: ids.join(),motivo: results.input1 },
-                        method: "PUT",    
-                        success: function(data){
-                            for(x in ids){
-                                $("#Permiso"+ids[x]).fadeOut();
-                            };
-                    
+                        url : DOMAIN + 'negaciones/varios',
+                        data : {ids : ids.join(), motivo : results.input1},
+                        method : "PUT",    
+                        success : function(data){
+                            navigator.notification.alert(
+                                "Los permisos fue rechazados con éxito.",  
+                                function(){location.href = "permisos_pendientes.html";},        
+                                "Rechazado",          
+                                'Aceptar'                
+                            );
                         }
                     })
                 }
             },
-            'Rechazar Masivo',           // title
-            ['Si','No']     // buttonLabels
+            'Rechazar Masivo',
+            ['Si','No']
         );
         $("#loading").fadeOut();
     }
