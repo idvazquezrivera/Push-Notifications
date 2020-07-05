@@ -1,6 +1,7 @@
 //var DOMAIN = "http://192.168.206.128:8085" + '/foediapi/api/permisos/';
 var DOMAIN = window.localStorage.getItem('ip') + '/foediapi/api/permisos/';
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
+var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://dc96a38c6bdc.ngrok.io' ) +  '/foediapi/api/permisos/';
 
 document.addEventListener("deviceready", function(){
     api.init()
