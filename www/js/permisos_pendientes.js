@@ -34,6 +34,25 @@ document.addEventListener("deviceready", function() {
             })              
         }
       });
+      try {
+        var notificationOpenedCallback = function(jsonData) {
+            console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+        };
+        window.plugins.OneSignal
+            .startInit("9279844e-0f7c-4469-a616-79df5e864a5a")
+            .handleNotificationOpened(notificationOpenedCallback)
+            .endInit();
+        var session=JSON.parse(localStorage.getItem('session'));
+        window.plugins.OneSignal.sendTag("direccion", session.direccion);
+        window.plugins.OneSignal.sendTag("area", session.area);
+        window.plugins.OneSignal.sendTag("nombre", session.nombre);
+        window.plugins.OneSignal.sendTag("puesto", session.puesto);
+        
+        window.plugins.OneSignal.sendTag("rol",app_settings.rol+localStorage.getItem('token'));
+        window.plugins.OneSignal.sendTag("id", app_settings.user.id+localStorage.getItem('token'));
+    } catch (e) {
+        console.log(e);
+    }
 }, false);
 
 var api = {
@@ -43,12 +62,11 @@ var api = {
             crossDomain: true,
             error:function(err){
                 response = err.responseJSON;                
-                navigator.notification.alert(
-                    response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion",  
-                    function(){ InputPassword.val(""); InputUsuario.val(""); $("#loading").fadeOut(); },       
-                    response && response.hasOwnProperty('error') ? response.error : 'Error',          
-                    'Aceptar'                
-                );    
+                M.toast({
+                    classes: 'rounded', 
+                    html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion",  
+                    completeCallback: function(){ InputPassword.val(""); InputUsuario.val(""); $("#loading").fadeOut()}
+                });    
             }, 
             beforeSend: function(xhr) { 
                 xhr.setRequestHeader("Authorization", "Bearer " + SESSION.access_token);
@@ -132,7 +150,6 @@ var api = {
         }); 
     },
     ver: function(button){
-        M.toast({ classes: 'rounded', html: "El permiso fue aprobado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
 
         window.localStorage.setItem('verPermiso',  $(button).attr('data-idPermiso'));
         location.href = "detalle_permiso.html";  
@@ -160,8 +177,7 @@ var api = {
     },
     aprobar_varios: function(is_correct){
         if(!is_correct){
-            navigator.notification.alert("No hay permisos seleccionados.", null, "Error", "Aceptar");
-            return;
+            return M.toast({ classes: 'rounded', html:"No hay permisos seleccionados."});
         }
         var ids = [];
         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
@@ -179,10 +195,6 @@ var api = {
                         method: "PUT",    
                         success: function(data){
                             M.toast({ classes: 'rounded', html: "Los permisos fueron aprobados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
-                            if(!is_correct){
-                                navigator.notification.alert("No hay permisos seleccionados.", null, "Error", "Aceptar");
-                                return;
-                            }
                         }
                     })
                 } 
@@ -216,8 +228,8 @@ var api = {
     },
     rechazar_varios: function(is_correct){
         if(!is_correct){
-            navigator.notification.alert("No hay permisos seleccionados.", null, "Error", "Aceptar");
-            return;
+            return M.toast({ classes: 'rounded', html:"No hay permisos seleccionados."});
+
         }
         var ids = [];
         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){

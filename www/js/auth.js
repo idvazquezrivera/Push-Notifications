@@ -1,5 +1,5 @@
 //var DOMAIN = "http://192.168.206.128:8085" + '/foediapi';
-var DOMAIN = window.localStorage.getItem('ip') + '/foediapi';
+var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://f8a0158d90e5.ngrok.io' ) + '/foediapi';
 
 document.addEventListener("deviceready", function() {
     window.localStorage.removeItem('session');
@@ -16,13 +16,9 @@ document.addEventListener("deviceready", function() {
             },                
             'Personalizar',      
             ['Aceptar','Cancelar'],       
-            'https://c8db542eaf5c.ngrok.io'           
+            'https://f8a0158d90e5.ngrok.io'           
         );
     })
-
-
-    
-    
 }, false);
 
 
@@ -59,27 +55,12 @@ var api = {
             success: function(data){
                 if(data.access_token)
                 {
-                    
-                    
-                    
-                    var app_settings = JSON.parse(localStorage.getItem('app_settings'));
-                    // Enable to debug issues.
-                    // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-                    try {
+                    window.localStorage.setItem('session', JSON.stringify(data));
+                    location.href = "permisos_pendientes.html";
 
-                        window.plugins.OneSignal.startInit("MTFkMjZkYjctZDFiYi00NjRlLWI2ZGEtYzMzOWViMTcyYmE1").handleNotificationOpened(function(jsonData) {
-                            window.localStorage.setItem('session', JSON.stringify(data));
-                            location.href = "permisos_pendientes.html";
-                        }).endInit();
-                        
-                        window.plugins.OneSignal.sendTag("jti", data.jti);
-                        window.plugins.OneSignal.sendTag("area", data.area);
-                        window.plugins.OneSignal.sendTag("puesto", data.puesto);
-                        window.plugins.OneSignal.sendTag("nombre", data.nombre);
-                    } catch (e) {
-                        console.log(e);
-                    }
-                   
+                }
+                $("#loading").fadeOut();
+
             },
             beforeSend: function(xhr) { 
                 xhr.setRequestHeader("Authorization", "Basic " + btoa("foediapp:F0ed1@pp!20"));
