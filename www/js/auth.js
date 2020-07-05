@@ -7,7 +7,7 @@ document.addEventListener("deviceready", function() {
     api.init();
     $("#ip").click(function(){
         navigator.notification.prompt(
-            'Dominio del API',  // message
+            'Dominio del API (https://f8a0158d90e5.ngrok.io)',  // message
             function(results){
                 if(results.buttonIndex == 1){
                     window.localStorage.setItem('ip', results.input1);
