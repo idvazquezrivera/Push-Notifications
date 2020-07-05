@@ -4,13 +4,23 @@ AUTOR: Marcela López Zatarain
 
 
 /* Fondo login */
+/* Fondo login */
 .fondo-login {
     background-color: #F9F9F9;
 }
-.barra_sup i {
-    color: #fff;
+
+/* Dropdown menu */
+.dropdown-toggle::after {
+    content: none;
 }
-.barra_sup{
+
+.btn-menu, .btn-menu:hover {
+    color: #fff;
+    background-color: #3b63ac;
+    border-color: #3b63ac;
+}
+
+.barra_sup {
     color: #fff;
     padding: 15px;
     background-color: #3B63AC;
@@ -19,6 +29,10 @@ AUTOR: Marcela López Zatarain
     z-index: 1000;
 }
 
+
+.barra_sup a {
+    color: #8DD0FA;
+}
 /* Estilo para botones con iconos */
 .cuadro-btn{
     width: 35px;
@@ -43,4 +57,20 @@ AUTOR: Marcela López Zatarain
 }
 .loading input[type=checkbox]{ 
     display: none!important;
+}
+
+/* Barra fija en footer */
+.barra-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 10px;
+    background-color: #F9F9F9;
+    border-top: 1px solid #ccc;
+}
+
+
+.custom-1{
+    box-shadow: none;
 }

@@ -16,7 +16,7 @@ document.addEventListener("deviceready", function() {
             },                
             'Personalizar',      
             ['Aceptar','Cancelar'],       
-            'http://192.168.206.128:8085'           
+            'https://c8db542eaf5c.ngrok.io'           
         );
     })
 }, false);

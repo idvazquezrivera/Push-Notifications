@@ -49,13 +49,24 @@
     </head>
     <body  class="fondo-login">
         <div id="loading"></div>
+        <!-- TITULOS HEADER -->
         <div class="barra_sup">
-            <div class="row p-0 m-0">
-                <div class="col-1 p-0 m-0"><img alt="Imagen FOEDI" src="images/icono_foedi.png" /></div>
-                <div class="col-10 p-0 m-0 text-center">Permisos pendientes</div>
-                <div class="col-1 p-0 m-0 text-right"><a href="index.html"><i class="fad fa-sign-out-alt"></i></a> </div>
-            </div> 
-        </div>   
+            <div class="row row-cols-2">
+                <div class="col-9"><img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /> Permisos pendientes</div>
+                <div class="col-3 text-right">
+                    <!-- MENU DROPDOWN -->
+                    <div class="btn-group">
+                      <button type="button" class="custom-1 btn btn-menu dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i>
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <a href="index.html" class="dropdown-item" type="button"><i class="fas fa-sign-out"></i> Salir</a>
+                      </div>
+                    </div>
+                    <!-- /MENU DROPDOWN -->
+                </div>
+              </div>    
+        </div>
+        <!-- /TITULOS HEADER -->
         <form>
             <div class="form-group form-check m-2">
                 <input  type="checkbox" class="form-check-input" name="checkedAll" id="checkedAll" >
@@ -98,22 +109,10 @@
                 <!-- /DATOS PERSONAL -->
             </div>
 
-                    <!----
-            <div class="fixed-bottom">
-            <input type="button" readonly disabled  class="cuadro-btn btn-block" value="APROBAR" />
-                <input type="button" readonly disabled  class="btn-block" value ="RECHAZAR" />
+            <div class="barra-footer">
+                <a class="btn btn-primary mt-3 ml-3" id="AprobarVarios" onclick="api.aprobar_varios(0)" style="color:#FFF;" class=""><i class="fad fa-check"></i> Aprobar</i></a>
+                <a class="btn btn-info mt-3 ml-2" id="RechazarVarios" onclick="api.rechazar_varios(0)"  style="color:#FFF;"><i class="fad fa-exchange"></i> Rechazar</i></a>
             </div>
-            --->
-            <div class="fixed-action-btn toolbar direction-top" style="transition: transform 0.2s ease 0s; transform: translate3d(0px, 0px, 0px);">
-                <a class="btn-floating btn-large" style="background:#3B63AC; transition: transform 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) 0s; transform: translate3d(0px, 0px, 0px);">
-                    <i class="fad fa-bars"></i>Menu</i>
-                </a>
-                <ul>
-                  <li class="waves-effect waves-light"><a id="AprobarVarios" onclick="api.aprobar_varios(0)" style="background:#0C615C;"><i class="fad fa-check"></i> Aprobar</i></a></li>
-                  <li class="waves-effect waves-light"><a id="RechazarVarios" onclick="api.rechazar_varios(0)"  style="background:#5F46A7;"><i class="fad fa-exchange"></i> Rechazar</i></a></li>
-                  <li class="waves-effect waves-light"><a href="index.html" style="background:#3B63AC;"><i class="fad fa-sign-out-alt"></i> Salir</i></a></li>
-                </ul>
-              </div>
         </form> 
         
     </body>

@@ -16,9 +16,13 @@ document.addEventListener("deviceready", function() {
             },                
             'Personalizar',      
             ['Aceptar','Cancelar'],       
-            'http://192.168.206.128:8085'           
+            'https://c8db542eaf5c.ngrok.io'           
         );
     })
+
+
+    
+    
 }, false);
 
 
@@ -55,12 +59,27 @@ var api = {
             success: function(data){
                 if(data.access_token)
                 {
-                    window.localStorage.setItem('session', JSON.stringify(data));
-                    location.href = "permisos_pendientes.html";
+                    
+                    
+                    
+                    var app_settings = JSON.parse(localStorage.getItem('app_settings'));
+                    // Enable to debug issues.
+                    // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+                    try {
 
-                }
-                $("#loading").fadeOut();
-
+                        window.plugins.OneSignal.startInit("MTFkMjZkYjctZDFiYi00NjRlLWI2ZGEtYzMzOWViMTcyYmE1").handleNotificationOpened(function(jsonData) {
+                            window.localStorage.setItem('session', JSON.stringify(data));
+                            location.href = "permisos_pendientes.html";
+                        }).endInit();
+                        
+                        window.plugins.OneSignal.sendTag("jti", data.jti);
+                        window.plugins.OneSignal.sendTag("area", data.area);
+                        window.plugins.OneSignal.sendTag("puesto", data.puesto);
+                        window.plugins.OneSignal.sendTag("nombre", data.nombre);
+                    } catch (e) {
+                        console.log(e);
+                    }
+                   
             },
             beforeSend: function(xhr) { 
                 xhr.setRequestHeader("Authorization", "Basic " + btoa("foediapp:F0ed1@pp!20"));

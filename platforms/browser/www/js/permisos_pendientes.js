@@ -65,11 +65,11 @@ var api = {
             url: DOMAIN + 'pendientes',
             method: "GET",    
             success: function(response){
+
                 var permisos = response;
                 var permiso = $("#Permiso");
                 var lista = $("#PermisosPendientes");
                 permiso.css('display','none');   $("#loading").fadeOut();
-
                 if(permisos.length)
                 {
                     var clones = [];
@@ -132,6 +132,8 @@ var api = {
         }); 
     },
     ver: function(button){
+        M.toast({ classes: 'rounded', html: "El permiso fue aprobado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+
         window.localStorage.setItem('verPermiso',  $(button).attr('data-idPermiso'));
         location.href = "detalle_permiso.html";  
     },
@@ -146,12 +148,7 @@ var api = {
                         url: DOMAIN + idPermiso + '/autorizaciones',
                         method: "PUT",    
                         success: function(data){
-                            navigator.notification.alert(
-                                "El permiso fue aprobado con éxito.",  
-                                function(){location.href = "permisos_pendientes.html";},        
-                                "Aprobado",          
-                                'Aceptar'                
-                            );
+                            M.toast({ classes: 'rounded', html: "El permiso fue aprobado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
                         }
                     })
                 }
@@ -168,7 +165,7 @@ var api = {
         }
         var ids = [];
         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-            if($(e).is(':checked')){
+            if($(e).is(':checked') && $(e).attr('data-idPermiso')){
                 ids.push($(e).attr('data-idPermiso'));
             }
         });
@@ -181,12 +178,11 @@ var api = {
                         data:{ids: ids.join() },
                         method: "PUT",    
                         success: function(data){
-                            navigator.notification.alert(
-                                "El permiso fue aprobado con éxito.",  
-                                function(){location.href = "permisos_pendientes.html";},        
-                                "Aprobado",          
-                                'Aceptar'                
-                            );
+                            M.toast({ classes: 'rounded', html: "Los permisos fueron aprobados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+                            if(!is_correct){
+                                navigator.notification.alert("No hay permisos seleccionados.", null, "Error", "Aceptar");
+                                return;
+                            }
                         }
                     })
                 } 
@@ -208,12 +204,8 @@ var api = {
                         method: "PUT",    
                         data: {motivo: results.input1},
                         success: function(data){
-                            navigator.notification.alert(
-                                "El permiso fue rechazado con éxito.",  
-                                function(){location.href = "permisos_pendientes.html";},        
-                                "Rechazado",          
-                                'Aceptar'                
-                            );
+                            M.toast({ classes: 'rounded', html: "El permiso fue rechazado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+
                         }
                     }) 
                 }
@@ -222,10 +214,14 @@ var api = {
             ['Aprovar','Cancelar']     
         );
     },
-    rechazar_varios: function(button){
+    rechazar_varios: function(is_correct){
+        if(!is_correct){
+            navigator.notification.alert("No hay permisos seleccionados.", null, "Error", "Aceptar");
+            return;
+        }
         var ids = [];
         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
-            if($(e).is(':checked')){
+            if($(e).is(':checked') && $(e).attr('data-idPermiso')){
                 ids.push($(e).attr('data-idPermiso'));
             }
         });
@@ -238,12 +234,7 @@ var api = {
                         data : {ids : ids.join(), motivo : results.input1},
                         method : "PUT",    
                         success : function(data){
-                            navigator.notification.alert(
-                                "Los permisos fue rechazados con éxito.",  
-                                function(){location.href = "permisos_pendientes.html";},        
-                                "Rechazado",          
-                                'Aceptar'                
-                            );
+                            M.toast({ classes: 'rounded', html: "Los permisos fueron rechazados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
                         }
                     })
                 }
