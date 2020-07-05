@@ -1,5 +1,5 @@
 //var DOMAIN = "http://192.168.206.128:8085" + '/foediapi';
-var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://f8a0158d90e5.ngrok.io' ) + '/foediapi';
+var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://dc96a38c6bdc.ngrok.io' ) + '/foediapi';
 
 document.addEventListener("deviceready", function() {
     window.localStorage.removeItem('session');
@@ -7,7 +7,7 @@ document.addEventListener("deviceready", function() {
     api.init();
     $("#ip").click(function(){
         navigator.notification.prompt(
-            'Dominio del API (https://f8a0158d90e5.ngrok.io)',  // message
+            'Dominio del API (https://dc96a38c6bdc.ngrok.io)',  // message
             function(results){
                 if(results.buttonIndex == 1){
                     window.localStorage.setItem('ip', results.input1);
@@ -16,7 +16,7 @@ document.addEventListener("deviceready", function() {
             },                
             'Personalizar',      
             ['Aceptar','Cancelar'],       
-            'https://f8a0158d90e5.ngrok.io'           
+            'https://dc96a38c6bdc.ngrok.io'           
         );
     })
 }, false);
