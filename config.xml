@@ -42,7 +42,25 @@
   <preference name="phonegap-version" value="cli-9.0.0" />
   <preference name="xwalkMultipleApk" value="false" />
 
+<preference name="ios-configuration" value="adhoc"/>
+<preference platform="ios" name="deployment-target" value="8.0"/>
+<!--creationInfo:{"src":"jsapp/template-blank-cordova-project-lite/sample.zip","projectTypeName":"com.intel.xdk.projecttype.jsapp"}-->
+<!-- <preference name="debuggable" value="false"/> -->
+<platform name="ios">
+    <!-- below requires the splash screen plugin -->
+    <!-- docs: https://github.com/apache/cordova-plugin-splashscreen -->
+    <preference name="AutoHideSplashScreen" value="true"/>
+    <preference name="FadeSplashScreen" value="false"/>
+    <preference name="FadeSplashScreenDuration" value="2"/>
+    <preference name="ShowSplashScreenSpinner" value="false"/>
 
+    <!-- below requires the status bar plugin -->
+    <!-- docs: https://github.com/apache/cordova-plugin-statusbar -->
+    <!-- see http://devgirl.org/2014/07/31/phonegap-developers-guid -->
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <preference name="StatusBarBackgroundColor" value="#000000"/>
+    <preference name="StatusBarStyle" value="lightcontent"/>
+</platform>
   <platform  name="android">
       <icon src="res/icon/android/ldpi.png" density="ldpi" />
       <icon src="res/icon/android/mdpi.png" density="mdpi" />
