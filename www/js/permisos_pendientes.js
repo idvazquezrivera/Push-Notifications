@@ -1,7 +1,6 @@
 //var DOMAIN = "http://192.168.206.128:8085" + '/foediapi/api/permisos/';
-var DOMAIN = window.localStorage.getItem('ip') + '/foediapi/api/permisos/';
-var SESSION = JSON.parse(window.localStorage.getItem('session'));
-
+//var DOMAIN = window.localStorage.getItem('ip') + '/foediapi/api/permisos/';
+var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://f0ce183ab03c.ngrok.io' ) + '/foediapi/api/permisos/';
 document.addEventListener("deviceready", function() {
     api.init();
     $("#checkedAll").change(function(){
@@ -65,10 +64,11 @@ var api = {
                 M.toast({
                     classes: 'rounded', 
                     html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion",  
-                    completeCallback: function(){ InputPassword.val(""); InputUsuario.val(""); $("#loading").fadeOut()}
+                    completeCallback: function(){         }
                 });    
             }, 
             beforeSend: function(xhr) { 
+                SESSION = JSON.parse(window.localStorage.getItem('session'));
                 xhr.setRequestHeader("Authorization", "Bearer " + SESSION.access_token);
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
                 $("#loading").fadeIn();
