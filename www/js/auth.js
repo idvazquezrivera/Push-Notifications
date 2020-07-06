@@ -1,5 +1,5 @@
 //var DOMAIN = "http://192.168.206.128:8085" + '/foediapi';
-var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://f0ce183ab03c.ngrok.io' ) + '/foediapi';
+var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://bbcfdb408a03.ngrok.io' ) + '/foediapi';
 
 document.addEventListener("deviceready", function() {
     window.localStorage.removeItem('session');
