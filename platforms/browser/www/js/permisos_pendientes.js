@@ -69,8 +69,6 @@ var api = {
             }, 
             beforeSend: function(xhr) { 
                 SESSION = JSON.parse(window.localStorage.getItem('session'));
-                console.log(SESSION);
-                console.log(SESSION.access_token)
                 xhr.setRequestHeader("Authorization", "Bearer " + SESSION.access_token);
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
                 $("#loading").fadeIn();
