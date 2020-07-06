@@ -14,7 +14,7 @@ document.addEventListener("deviceready", function() {
 
             $("#RechazarVarios").removeAttr('disabled');
             $("#RechazarVarios").removeAttr('readonly');
-            $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(1)')
+            $("#RechazarVarios").attr('onclick', 'api.rechazar_varios(1)')
 
           $(".checkSingle").each(function(){
             this.checked=true;
@@ -27,7 +27,7 @@ document.addEventListener("deviceready", function() {
 
             $("#RechazarVarios").attr('disabled');
             $("#RechazarVarios").attr('readonly');
-            $("#RechazarVarios").attr('onclick', 'api.aprobar_varios(0)')
+            $("#RechazarVarios").attr('onclick', 'api.rechazar_varios(0)')
             $(".checkSingle").each(function(){
                 this.checked=false;
             })              
