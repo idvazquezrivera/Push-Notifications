@@ -3,6 +3,18 @@ var SESSION = JSON.parse(window.localStorage.getItem('session'));
 var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://spicy-termite-18.telebit.io' ) + '/foediapi/api/permisos/';
 document.addEventListener("deviceready", function() {
     api.init();
+    window.plugins.OneSignal
+    .startInit("e24e573b-7717-403c-ba09-e002ebff945f")
+    .handleNotificationOpened(function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));                   
+        
+    })
+    .endInit();
+    
+    window.plugins.OneSignal.sendTag("puesto", SESSION.puesto);
+    window.plugins.OneSignal.sendTag("area",   SESSION.area);
+    window.plugins.OneSignal.sendTag("nombre", SESSION.nombre);
+    window.plugins.OneSignal.sendTag("id",     SESSION.id);
     $("#checkedAll").change(function(){
         if(this.checked){
             $("#checkedAll").removeAttr('disabled')
