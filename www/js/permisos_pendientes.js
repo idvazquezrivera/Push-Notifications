@@ -1,8 +1,20 @@
 //var DOMAIN = "http://192.168.206.128:8085" + '/foediapi/api/permisos/';
-//var DOMAIN = window.localStorage.getItem('ip') + '/foediapi/api/permisos/';
-var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://bbcfdb408a03.ngrok.io' ) + '/foediapi/api/permisos/';
+var SESSION = JSON.parse(window.localStorage.getItem('session'));
+var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://spicy-termite-18.telebit.io' ) + '/foediapi/api/permisos/';
 document.addEventListener("deviceready", function() {
     api.init();
+    window.plugins.OneSignal
+    .startInit("e24e573b-7717-403c-ba09-e002ebff945f")
+    .handleNotificationOpened(function(jsonData) {
+        console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));                   
+        
+    })
+    .endInit();
+    
+    window.plugins.OneSignal.sendTag("puesto", SESSION.puesto);
+    window.plugins.OneSignal.sendTag("area",   SESSION.area);
+    window.plugins.OneSignal.sendTag("nombre", SESSION.nombre);
+    window.plugins.OneSignal.sendTag("id",     SESSION.id);
     $("#checkedAll").change(function(){
         if(this.checked){
             $("#checkedAll").removeAttr('disabled')
@@ -33,7 +45,8 @@ document.addEventListener("deviceready", function() {
             })              
         }
       });
-      try {
+     
+     /* try {
         var notificationOpenedCallback = function(jsonData) {
             console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
         };
@@ -51,7 +64,7 @@ document.addEventListener("deviceready", function() {
         window.plugins.OneSignal.sendTag("id", app_settings.user.id+localStorage.getItem('token'));
     } catch (e) {
         console.log(e);
-    }
+    }*/
 }, false);
 
 var api = {
@@ -61,14 +74,10 @@ var api = {
             crossDomain: true,
             error:function(err){
                 response = err.responseJSON;                
-                M.toast({
-                    classes: 'rounded', 
-                    html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion",  
-                    completeCallback: function(){         }
-                });    
+                M.toast({html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion"});    
+                $("#loading").fadeOut();
             }, 
             beforeSend: function(xhr) { 
-                SESSION = JSON.parse(window.localStorage.getItem('session'));
                 xhr.setRequestHeader("Authorization", "Bearer " + SESSION.access_token);
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
                 $("#loading").fadeIn();
@@ -159,13 +168,12 @@ var api = {
         navigator.notification.confirm(
             '¿Aprobar el permiso No.'+ idPermiso+'?', 
              function(results){
-                 console.log(results)
                  if(results == 1){
                     $.ajax({
                         url: DOMAIN + idPermiso + '/autorizaciones',
                         method: "PUT",    
                         success: function(data){
-                            M.toast({ classes: 'rounded', html: "El permiso fue aprobado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+                            M.toast({html: "El permiso fue aprobado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
                         }
                     })
                 }
@@ -177,7 +185,7 @@ var api = {
     },
     aprobar_varios: function(is_correct){
         if(!is_correct){
-            return M.toast({ classes: 'rounded', html:"No hay permisos seleccionados."});
+            return M.toast({html:"No hay permisos seleccionados."});
         }
         var ids = [];
         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
@@ -194,7 +202,7 @@ var api = {
                         data:{ids: ids.join() },
                         method: "PUT",    
                         success: function(data){
-                            M.toast({ classes: 'rounded', html: "Los permisos fueron aprobados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+                            M.toast({html: "Los permisos fueron aprobados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
                         }
                     })
                 } 
@@ -216,7 +224,7 @@ var api = {
                         method: "PUT",    
                         data: {motivo: results.input1},
                         success: function(data){
-                            M.toast({ classes: 'rounded', html: "El permiso fue rechazado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+                            M.toast({html: "El permiso fue rechazado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
 
                         }
                     }) 
@@ -228,7 +236,7 @@ var api = {
     },
     rechazar_varios: function(is_correct){
         if(!is_correct){
-            return M.toast({ classes: 'rounded', html:"No hay permisos seleccionados."});
+            return M.toast({html:"No hay permisos seleccionados."});
 
         }
         var ids = [];
@@ -239,14 +247,14 @@ var api = {
         });
         navigator.notification.prompt(
             '¿Deseas rechazar los permisos No. ' + ids.join(' y ') +' ?', 
-                function(){
+                function(results){
                 if(results.buttonIndex === 1){                    
                     $.ajax({
                         url : DOMAIN + 'negaciones/varios',
                         data : {ids : ids.join(), motivo : results.input1},
                         method : "PUT",    
                         success : function(data){
-                            M.toast({ classes: 'rounded', html: "Los permisos fueron rechazados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+                            M.toast({html: "Los permisos fueron rechazados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
                         }
                     })
                 }

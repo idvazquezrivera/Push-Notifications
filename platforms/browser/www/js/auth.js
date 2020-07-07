@@ -1,5 +1,5 @@
 //var DOMAIN = "http://192.168.206.128:8085" + '/foediapi';
-var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://bbcfdb408a03.ngrok.io' ) + '/foediapi';
+var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://spicy-termite-18.telebit.io' ) + '/foediapi';
 
 document.addEventListener("deviceready", function() {
     window.localStorage.removeItem('session');
@@ -33,7 +33,7 @@ var api = {
         var InputUsuario = $('#InputUsuario');
         var InputPassword = $('#InputPassword');
         if(!InputUsuario.val() || !InputPassword.val()){
-            navigator.notification.alert("Complete todos los campos", function(){ InputPassword.val("");  InputUsuario.val("");}, 'Error', 'Aceptar');
+            M.toast({html:"Complete todos los campos"}); 
     api.init();
     return;
         }
@@ -44,13 +44,10 @@ var api = {
             crossDomain: true,
             data: {username: InputUsuario.val(), password: InputPassword.val(), grant_type:"password"},
             error:function(err){
-                response = err.responseJSON;                
-                navigator.notification.alert(
-                    response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion",  
-                    function(){ InputPassword.val(""); InputUsuario.val(""); $("#loading").fadeOut(); },       
-                    response && response.hasOwnProperty('error') ? response.error : 'Error',          
-                    'Aceptar'                
-                );    
+                response = err.responseJSON;    
+                M.toast({html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion"});    
+                $("#loading").fadeOut();
+
             }, 
             success: function(data){
                 if(data.access_token)
