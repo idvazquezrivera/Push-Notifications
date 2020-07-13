@@ -46,25 +46,7 @@ document.addEventListener("deviceready", function() {
         }
       });
      
-     /* try {
-        var notificationOpenedCallback = function(jsonData) {
-            console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-        };
-        window.plugins.OneSignal
-            .startInit("9279844e-0f7c-4469-a616-79df5e864a5a")
-            .handleNotificationOpened(notificationOpenedCallback)
-            .endInit();
-        var session=JSON.parse(localStorage.getItem('session'));
-        window.plugins.OneSignal.sendTag("direccion", session.direccion);
-        window.plugins.OneSignal.sendTag("area", session.area);
-        window.plugins.OneSignal.sendTag("nombre", session.nombre);
-        window.plugins.OneSignal.sendTag("puesto", session.puesto);
-        
-        window.plugins.OneSignal.sendTag("rol",app_settings.rol+localStorage.getItem('token'));
-        window.plugins.OneSignal.sendTag("id", app_settings.user.id+localStorage.getItem('token'));
-    } catch (e) {
-        console.log(e);
-    }*/
+     
 }, false);
 
 var api = {
