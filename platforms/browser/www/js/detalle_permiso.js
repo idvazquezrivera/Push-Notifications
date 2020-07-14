@@ -29,6 +29,8 @@ var api = {
     get_permiso: function(event){
         var self = this
         var idPermiso = window.localStorage.getItem('verPermiso')
+        $("#loading").fadeIn();
+
         $.ajax({
             url: DOMAIN + idPermiso,
             method: "GET",    
@@ -36,15 +38,60 @@ var api = {
                 var permiso = response;
                 if(permiso)
                 {
+                    $("#PermisoTipo").html(permiso.tipoPermiso);
+                    $("#Aprobar, #Rechazar").attr('data-idPermiso', idPermiso);
                     for(x in permiso){
                         if(permiso[x]){
                             $("." + x).html(permiso[x]);
                             $('#item_' + x).removeClass('d-none')
                         }
                     }
+                    $("#loading").fadeOut();
+
                 }
             },
         }); 
     },
-    
+    aprobar: function(button){
+        var idPermiso =  $(button).attr('data-idPermiso');
+        navigator.notification.confirm(
+            '¿Aprobar el permiso No.'+ idPermiso+'?', 
+             function(results){
+                 if(results == 1){
+                    $.ajax({
+                        url: DOMAIN + idPermiso + '/autorizaciones',
+                        method: "PUT",    
+                        success: function(data){
+                            M.toast({html: "El permiso fue aprobado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+                        }
+                    })
+                }
+            },
+            $("#Permiso"+idPermiso).find('.tipoPermiso').html(),      
+            ['Si','No']
+        );
+        
+    },
+    rechazar: function(button){
+        var idPermiso =  $(button).attr('data-idPermiso');
+        navigator.notification.prompt(
+            'Escribe un motivo de rechazo el permiso  No.' +idPermiso  +' ?',
+             function(results){
+                 console.log(results)
+                if(results.buttonIndex === 1){
+                    $.ajax({
+                        url: DOMAIN + idPermiso + '/negaciones',
+                        method: "PUT",    
+                        data: {motivo: results.input1},
+                        success: function(data){
+                            M.toast({html: "El permiso fue rechazado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
+
+                        }
+                    }) 
+                }
+            },
+            $(button).parent().find('.tipoPermiso').html(),           
+            ['Aprovar','Cancelar']     
+        );
+    },
 }

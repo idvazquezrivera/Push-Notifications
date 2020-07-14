@@ -15,6 +15,8 @@ document.addEventListener("deviceready", function() {
     window.plugins.OneSignal.sendTag("area",   SESSION.area);
     window.plugins.OneSignal.sendTag("nombre", SESSION.nombre);
     window.plugins.OneSignal.sendTag("id",     SESSION.id);
+    window.plugins.OneSignal.setExternalUserId(SESSION.id);
+
     $("#checkedAll").change(function(){
         if(this.checked){
             $("#checkedAll").removeAttr('disabled')

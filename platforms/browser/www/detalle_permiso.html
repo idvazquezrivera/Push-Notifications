@@ -37,7 +37,6 @@
         <title>FOEDI</title>
 
         <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
-        <link rel="stylesheet" type="text/css" href="css/materialize.css">
         <link rel="stylesheet" href="css/bootstrap.css"> 
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -49,15 +48,17 @@
 
     <body class="fondo-login">   
         <!-- TITULOS HEADER -->
+        <div id="loading"></div>
+
         <div class="barra_sup">
           <div class="row row-cols-2">
               <div class="col-1">
                   <a href="permisos_pendientes.html"><i class="fas fa-arrow-left"></i></a> 
               </div>
               <div class="col-9">
-                  <img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /> Permiso por puntualidad
+                  <img alt="Imagen FOEDI" class="img-fluid" src="images/icono_foedi.png" /> <span id="PermisoTipo"></span>
               </div>
-              <div class="col-2 text-right">
+              <div class="col-1 text-right">
                   <!-- MENU DROPDOWN -->
                   <div class="btn-group">
                     <button type="button" class="btn btn-menu dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i>
@@ -70,6 +71,7 @@
               </div>
             </div>    
       </div>
+      
         <!-- /TITULOS HEADER -->     
         <!-- /TITULOS HEADER -->     
         <!-- DETALLE DEL PERMISO -->
@@ -174,11 +176,11 @@
           </div>
 
         </div>
-        <!-- /DETALLE DEL PERMISO -->
-        <a id="AprobarVarios" onclick="api.aprobar_varios(0)" style="background:#0C615C;"><i class="fad fa-check"></i> Aprobar</i></a>
-        <a id="RechazarVarios" onclick="api.rechazar_varios(0)"  style="background:#5F46A7;"><i class="fad fa-exchange"></i> Rechazar</i></a>
-        <a href="index.html" style="background:#3B63AC;"><i class="fad fa-sign-out-alt"></i> Salir</i></a>
-        
+        <br><br><br>
+        <div class="barra-footer">
+            <a class="btn btn-primary mt-3 ml-3" id="Aprobar" onclick="api.aprobar(this)"  style="color:#FFF;" class=""><i class="fad fa-check"></i> Aprobar</i></a>
+            <a class="btn btn-info mt-3 ml-2" id="Rechazar" onclick="api.rechazar(this)"   style="color:#FFF;"><i class="fad fa-exchange"></i> Rechazar</i></a>
+        </div>
     
       </body>
       <script type="text/javascript" src="js/jquery.js"></script>
