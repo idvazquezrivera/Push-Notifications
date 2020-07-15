@@ -6,7 +6,7 @@ var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('
 document.addEventListener("deviceready", function(){
     api.init()
 }, false);
-
+var URLID =  parseInt(window.location.hash.substring(1));
 var api = {
     init: function(){
         $.ajaxSetup({
@@ -14,7 +14,7 @@ var api = {
             crossDomain: true,
             error:function(err){
                 response = err.responseJSON;                
-                M.toast({html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion"});    
+                M.toast({html:response && response.hasOwnProperty('error') ? response.message : "Api no responde, compruebe su conexion"});    
                 $("#loading").fadeOut();
             }, 
             beforeSend: function(xhr) { 
@@ -24,6 +24,9 @@ var api = {
             },
             
         }); 
+        if(URLID > 0){
+            var idPermiso = window.localStorage.setItem('verPermiso', URLID);
+        }
         this.get_permiso();
     },
     get_permiso: function(event){
