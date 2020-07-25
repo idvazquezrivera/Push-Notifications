@@ -1,24 +1,11 @@
-//var DOMAIN = "http://192.168.206.128:8085" + '/foediapi';
 var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://spicy-termite-18.telebit.io' ) + '/foediapi';
+DOMAIN = "https://chatty-insect-28.telebit.io" + '/foediapi';
 
 document.addEventListener("deviceready", function() {
     window.localStorage.removeItem('session');
 
     api.init();
-    $("#ip").click(function(){
-        navigator.notification.prompt(
-            'Dominio del API (https://f8a0158d90e5.ngrok.io)',  // message
-            function(results){
-                if(results.buttonIndex == 1){
-                    window.localStorage.setItem('ip', results.input1);
-                    DOMAIN = results.input1 + '/foediapi';
-                }
-            },                
-            'Personalizar',      
-            ['Aceptar','Cancelar'],       
-            'https://f8a0158d90e5.ngrok.io'           
-        );
-    })
+
 }, false);
 
 
@@ -33,8 +20,14 @@ var api = {
         var InputUsuario = $('#InputUsuario');
         var InputPassword = $('#InputPassword');
         if(!InputUsuario.val() || !InputPassword.val()){
-            M.toast({html:"Complete todos los campos"}); 
-    api.init();
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: "Complete los campos",
+                showConfirmButton: false,
+                timer: 1500
+            }); 
+        api.init();
     return;
         }
         $.ajax({
@@ -45,8 +38,15 @@ var api = {
             data: {username: InputUsuario.val(), password: InputPassword.val(), grant_type:"password"},
             error:function(err){
                 response = err.responseJSON;    
-                M.toast({html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion"});    
-                $("#loading").fadeOut();
+                $("#loading").fadeOut();               
+                Swal.fire({
+                    icon: 'error',
+                    title: response && response.hasOwnProperty('error') ? response.error_description : "Api no responde, compruebe su conexion",
+                    showConfirmButton: false,
+                    timer: 2500
+                }).then((result) => {
+                    location.href = "index.html";  
+                })                
 
             }, 
             success: function(data){

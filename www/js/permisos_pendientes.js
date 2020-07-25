@@ -1,6 +1,5 @@
-//var DOMAIN = "http://192.168.206.128:8085" + '/foediapi/api/permisos/';
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
-var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://spicy-termite-18.telebit.io' ) + '/foediapi/api/permisos/';
+var DOMAIN = 'https://chatty-insect-28.telebit.io/foediapi/api/permisos/';
 document.addEventListener("deviceready", function() {
     api.init();
     window.plugins.OneSignal
@@ -57,13 +56,20 @@ var api = {
             dataType : 'json',
             crossDomain: true,
             error:function(err){
-                response = err.responseJSON;                
-                M.toast({html:response && response.hasOwnProperty('error_description') ? response.error_description : "Api no responde, compruebe su conexion"});    
-                $("#loading").fadeOut();
+                response = err.responseJSON; 
+                $("#loading").fadeOut();               
+                Swal.fire({
+                    icon: 'error',
+                    title: response && response.hasOwnProperty('error') ? response.message : "Api no responde, compruebe su conexion",
+                    confirmButtonText: 'Aceptar',
+
+                }).then((result) => {
+                    location.href = "index.html";  
+                })                          
             }, 
             beforeSend: function(xhr) { 
                 xhr.setRequestHeader("Authorization", "Bearer " + SESSION.access_token);
-                xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 $("#loading").fadeIn();
             },
             
@@ -149,27 +155,45 @@ var api = {
     },
     aprobar: function(button){
         var idPermiso =  $(button).attr('data-idPermiso');
-        navigator.notification.confirm(
-            '¿Aprobar el permiso No.'+ idPermiso+'?', 
-             function(results){
-                 if(results == 1){
-                    $.ajax({
-                        url: DOMAIN + idPermiso + '/autorizaciones',
-                        method: "PUT",    
-                        success: function(data){
-                            M.toast({html: "El permiso fue aprobado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
-                        }
-                    })
-                }
+
+        Swal.fire({
+            title: 'Aprobar permiso',
+            text: '¿Aprobar el permiso No.'+ idPermiso+'?', 
+            inputAttributes: {
+              autocapitalize: 'off'
             },
-            $("#Permiso"+idPermiso).find('.tipoPermiso').html(),      
-            ['Si','No']
-        );
-        
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            confirmButtonColor: '#0C615C',
+            confirmButtonText: '<i class="fad fa-check" aria-hidden="true"></i> Aprobar ',
+            showLoaderOnConfirm: true
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: DOMAIN + idPermiso + '/autorizaciones',
+                    method: "PUT",    
+                    success: function(data){
+                     $("#loading").fadeOut();               
+
+                        Swal.fire({
+                            title: 'Aprobado!',
+                            text: "El permiso fue aprobado con éxito.",
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar',
+
+                        }).then((result) => {
+                            location.href = "permisos_pendientes.html";  
+                        })                         
+                    
+                }
+             })
+            }
+         
+        })
     },
     aprobar_varios: function(is_correct){
         if(!is_correct){
-            return M.toast({html:"No hay permisos seleccionados."});
+            return Swal.fire('Error',"No hay permisos seleccionados.", 'error');
         }
         var ids = [];
         $("#PermisosPendientes input[type='checkbox']").each(function(i, e){
@@ -177,50 +201,87 @@ var api = {
                 ids.push($(e).attr('data-idPermiso'));
             }
         });
-        navigator.notification.confirm(
-            '¿Deseas aprobar los permisos No. ' + ids.join(' y ') +' ?', 
-             function(results){
-                if(results === 1){    
-                    $.ajax({
-                        url: DOMAIN + 'autorizaciones/varios',
-                        data:{ids: ids.join() },
-                        method: "PUT",    
-                        success: function(data){
-                            M.toast({html: "Los permisos fueron aprobados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
-                        }
-                    })
-                } 
+        Swal.fire({
+            title: 'Aprobar permiso',
+            text:'¿Deseas aprobar los permisos No. ' + ids.join(' y ') +' ?',
+            inputAttributes: {
+              autocapitalize: 'off'
             },
-            'Aprobar masivo',          
-            ['Si','No']     
-        );
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            confirmButtonColor: '#0C615C',
+            confirmButtonText: '<i class="fad fa-check" aria-hidden="true"></i> Aprobar ',
+            showLoaderOnConfirm: true
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: DOMAIN + 'autorizaciones/varios',
+                    data:{ids: ids.join() },
+                    method: "PUT",    
+                    success: function(data){
+                $("#loading").fadeOut();               
+
+                        Swal.fire({
+                            title: 'Aprobado!',
+                            text: 'Los permisos fueron aprobados.',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar',
+
+                        }).then((result) => {
+                            location.href = "permisos_pendientes.html";  
+                        })
+
+                    }
+                })
+            }
+        })
+ 
         $("#loading").fadeOut();
     },
     rechazar: function(button){
         var idPermiso =  $(button).attr('data-idPermiso');
-        navigator.notification.prompt(
-            'Escribe un motivo de rechazo el permiso  No.' +idPermiso  +' ?',
-             function(results){
-                 console.log(results)
-                if(results.buttonIndex === 1){
-                    $.ajax({
-                        url: DOMAIN + idPermiso + '/negaciones',
-                        method: "PUT",    
-                        data: {motivo: results.input1},
-                        success: function(data){
-                            M.toast({html: "El permiso fue rechazado con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
-
-                        }
-                    }) 
-                }
+        
+        Swal.fire({
+            title: 'Rechazar permiso',
+            input: 'text',
+            icon: 'question',
+            text: 'Captura el motivo de rechazo',
+            inputAttributes: {
+              autocapitalize: 'off'
             },
-            $(button).parent().find('.tipoPermiso').html(),           
-            ['Aprovar','Cancelar']     
-        );
+            confirmButtonColor: '#5F46A7',
+
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+
+            confirmButtonText: '<i class="fad fa-exchange" aria-hidden="true"></i> Rechazar',
+            showLoaderOnConfirm: true
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: DOMAIN + idPermiso + '/negaciones',
+                    method: "PUT",    
+                    data: {motivo: result.value},
+                    success: function(data){
+                $("#loading").fadeOut();               
+
+                        Swal.fire({
+                            title: 'Rechazado!',
+                            text: 'El permiso fue rechazado.',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar',
+
+                        }).then((result) => {
+                            location.href = "permisos_pendientes.html";  
+                        }) 
+                    }
+                }) 
+                }
+            })
     },
     rechazar_varios: function(is_correct){
         if(!is_correct){
-            return M.toast({html:"No hay permisos seleccionados."});
+            return Swal.fire('Error',"No hay permisos seleccionados.", 'error' );
 
         }
         var ids = [];
@@ -229,23 +290,45 @@ var api = {
                 ids.push($(e).attr('data-idPermiso'));
             }
         });
-        navigator.notification.prompt(
-            '¿Deseas rechazar los permisos No. ' + ids.join(' y ') +' ?', 
-                function(results){
-                if(results.buttonIndex === 1){                    
-                    $.ajax({
-                        url : DOMAIN + 'negaciones/varios',
-                        data : {ids : ids.join(), motivo : results.input1},
-                        method : "PUT",    
-                        success : function(data){
-                            M.toast({html: "Los permisos fueron rechazados con éxito.",  completeCallback:function(){location.href = "permisos_pendientes.html"}});
-                        }
-                    })
-                }
+
+        Swal.fire({
+            text: 'Rechazar permisos No. ' + ids.join(' y '),
+            input: 'text',
+            icon: 'question',
+            title: 'Captura el motivo de rechazo',
+            inputAttributes: {
+              autocapitalize: 'off'
             },
-            'Rechazar Masivo',
-            ['Si','No']
-        );
-        $("#loading").fadeOut();
+            confirmButtonColor: '#5F46A7',
+
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+
+            confirmButtonText: '<i class="fad fa-exchange" aria-hidden="true"></i> Rechazar',
+          }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url : DOMAIN + 'negaciones/varios',
+                    data : {ids : ids.join(), motivo : result.value},
+                    method : "PUT",    
+                    success : function(data){
+                $("#loading").fadeOut();               
+
+                        Swal.fire({
+                            title: 'Rechazado!',
+                            text: 'Los permisos fueron rechazados.',
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar',
+
+                        }).then((result) => {
+                            location.href = "permisos_pendientes.html";  
+                        })
+
+                    }
+                })
+                        
+                    
+            }
+        })
     }
 }
