@@ -24,7 +24,7 @@ var api = {
                 icon: 'error',
                 title: 'Error',
                 text: "Complete los campos",
-                showConfirmButton: false,
+                confirmButtonText: 'Aceptar',
                 timer: 1500
             }); 
         api.init();

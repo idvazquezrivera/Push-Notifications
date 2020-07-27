@@ -14,8 +14,10 @@ var api = {
                 response = err.responseJSON; 
                 $("#loading").fadeOut();
                 Swal.fire({
+                    title: 'Error',
                     icon: 'error',
-                    title: response && response.hasOwnProperty('error') ? response.message : "Api no responde, compruebe su conexion",
+                    text: response && response.hasOwnProperty('error') ? response.message : "Api no responde, compruebe su conexion",
+                    confirmButtonText: 'Aceptar',
                 }).then((result) => {
                     location.href = "index.html";  
                 })          
@@ -73,15 +75,24 @@ var api = {
             confirmButtonText: '<i class="fad fa-check" aria-hidden="true"></i> Aprobar ',
             timer: 2500
         }).then((result) => {
-            if (result.value) {
-                Swal.fire({
-                    title: 'Aprobado!',
-                    text: "El permiso fue aprobado con éxito.",
-                    icon: 'success',
-                }).then((result) => {
-                    location.href = "permisos_pendientes.html";  
-                })    
-            }
+            $.ajax({
+                url: DOMAIN + idPermiso + '/autorizaciones',
+                method: "PUT",    
+                success: function(data){
+                $("#loading").fadeOut();               
+
+                    Swal.fire({
+                        title: 'Aprobado!',
+                        text: "El permiso fue aprobado con éxito.",
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar',
+
+                    }).then((result) => {
+                        location.href = "permisos_pendientes.html";  
+                    })                         
+                
+                 }
+            })  
         })   
         
     },
@@ -114,7 +125,7 @@ var api = {
                             text: 'Los permisos fueron rechazados.',
                             icon: 'success',
                             timer: 1500,
-                            showConfirmButton: false,
+                            confirmButtonText: 'Aceptar',
                             timer: 2500
                         })  .then((result) => {
                             location.href = "permisos_pendientes.html";  

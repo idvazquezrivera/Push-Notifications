@@ -41,7 +41,8 @@ var api = {
                 $("#loading").fadeOut();               
                 Swal.fire({
                     icon: 'error',
-                    title: response && response.hasOwnProperty('error') ? response.error_description : "Api no responde, compruebe su conexion",
+                    title: 'Error',
+                    text: response && response.hasOwnProperty('error') ? response.error_description : "Api no responde, compruebe su conexion",
                     showConfirmButton: false,
                     timer: 2500
                 }).then((result) => {
