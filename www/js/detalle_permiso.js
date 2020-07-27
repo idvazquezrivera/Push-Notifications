@@ -78,7 +78,7 @@ var api = {
                     title: 'Aprobado!',
                     text: "El permiso fue aprobado con éxito.",
                     icon: 'success',
-                })    .then((result) => {
+                }).then((result) => {
                     location.href = "permisos_pendientes.html";  
                 })    
             }
@@ -107,7 +107,7 @@ var api = {
                 $.ajax({
                     url: DOMAIN + idPermiso + '/negaciones',
                     method: "PUT",    
-                    data: {motivo: results.input1},
+                    data: {motivo: result.value},
                     success: function(data){
                         Swal.fire({
                             title: 'Rechazado!',

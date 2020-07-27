@@ -67,6 +67,7 @@ var api = {
             text: '¿Aprobar el permiso No.'+ idPermiso+'?',
             showConfirmButton: true,
             cancelButtonText: 'Cerrar',
+            showCancelButton: true,
 
             confirmButtonColor: '#0C615C',
             confirmButtonText: '<i class="fad fa-check" aria-hidden="true"></i> Aprobar ',
@@ -77,7 +78,7 @@ var api = {
                     title: 'Aprobado!',
                     text: "El permiso fue aprobado con éxito.",
                     icon: 'success',
-                })    .then((result) => {
+                }).then((result) => {
                     location.href = "permisos_pendientes.html";  
                 })    
             }
@@ -106,7 +107,7 @@ var api = {
                 $.ajax({
                     url: DOMAIN + idPermiso + '/negaciones',
                     method: "PUT",    
-                    data: {motivo: results.input1},
+                    data: {motivo: result.value},
                     success: function(data){
                         Swal.fire({
                             title: 'Rechazado!',
