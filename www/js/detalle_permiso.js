@@ -133,6 +133,14 @@ var api = {
                     }
                 }) 
                 }
+            else{
+                Swal.fire({
+                    title: 'Error',
+                    icon: 'error',
+                    text: "Debe especificar un motivo de rechazo",
+                    confirmButtonText: 'Aceptar',
+                })
+            }
             })
     },
 }
