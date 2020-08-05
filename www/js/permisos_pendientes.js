@@ -1,6 +1,6 @@
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
 // var DOMAIN = 'https://chatty-insect-28.telebit.io/foediapi/api/permisos/';
-var DOMAIN = var DOMAIN = window.localStorage.getItem('ip') + '/foediapi/api/permisos/'; 
+var DOMAIN = window.localStorage.getItem('ip') + '/foediapi/api/permisos/'; 
 document.addEventListener("deviceready", function() {
     api.init();
     window.plugins.OneSignal
