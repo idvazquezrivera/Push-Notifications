@@ -1,4 +1,4 @@
-var DOMAIN =  'http://192.168.206.128:8085/foediapi';
+var DOMAIN =  'http://5440a123e6a9.ngrok.io/foediapi';
 
 document.addEventListener("deviceready", function() {
     window.localStorage.removeItem('session');
