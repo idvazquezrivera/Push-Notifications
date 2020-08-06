@@ -1,5 +1,4 @@
-var DOMAIN =  (window.localStorage.getItem('ip') ? window.localStorage.getItem('ip') : 'https://spicy-termite-18.telebit.io' ) + '/foediapi';
-DOMAIN = "https://chatty-insect-28.telebit.io" + '/foediapi';
+var DOMAIN =  'http://192.168.206.128:8085/foediapi';
 
 document.addEventListener("deviceready", function() {
     window.localStorage.removeItem('session');
