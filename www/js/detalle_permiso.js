@@ -1,4 +1,4 @@
-var DOMAIN = 'http://192.168.206.128:8085/foediapi/api/permisos/';
+var DOMAIN = 'https://5440a123e6a9.ngrok.io/foediapi/api/permisos/';
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
 //var DOMAIN = 'https://chatty-insect-28.telebit.io/foediapi/api/permisos/';
 document.addEventListener("deviceready", function(){
