@@ -1,5 +1,5 @@
 var SESSION = JSON.parse(window.localStorage.getItem('session'));
-var DOMAIN = 'http://192.168.206.128:8085/foediapi/api/permisos/';
+var DOMAIN = 'http://5440a123e6a9.ngrok.io/foediapi/api/permisos/';
 document.addEventListener("deviceready", function() {
     api.init();
     window.plugins.OneSignal
